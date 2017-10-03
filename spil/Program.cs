@@ -16,8 +16,10 @@ namespace spil
 
         private void Run()
         {
+
             GameChooser chooseGame = new GameChooser();
             chooseGame.StartMenu();
+
         }
     }
 }
