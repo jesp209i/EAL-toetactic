@@ -12,7 +12,7 @@ namespace spil
             {
                 ShowMenuStart();
                 userInput = GetUserChoice();
-                switch (GetUserChoice())
+                switch (userInput)
                 {
                     case "1": BeginTicTacToeMenu();
                         break;
@@ -47,7 +47,7 @@ namespace spil
             Console.WriteLine("1. TicTacToe");
             Console.WriteLine("2. Battleships");
             Console.WriteLine();
-            Console.WriteLine("0. keepMenuRunning");
+            Console.WriteLine("0. Afslut");
         }
 
         private string GetUserChoice()
