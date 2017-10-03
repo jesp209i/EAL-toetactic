@@ -16,8 +16,10 @@ namespace spil
 
         private void Run()
         {
-            TicTacToeMenu ticTacToeMenu = new TicTacToeMenu();
-            ticTacToeMenu.Show();
+            //TicTacToeMenu ticTacToeMenu = new TicTacToeMenu();
+            //ticTacToeMenu.Show();
+            BattleShipsMenu battleShipsMenu = new BattleShipsMenu();
+            battleShipsMenu.Show();
         }
     }
 }
