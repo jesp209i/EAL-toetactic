@@ -46,7 +46,7 @@
     <Compile Include="GameChooser.cs" />
     <Compile Include="BattleShips.cs" />
     <Compile Include="BattleShipsMenu.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="TicTacToePlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicTacToe.cs" />

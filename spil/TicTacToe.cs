@@ -12,8 +12,8 @@ namespace spil
         public char[,] GameBoard { get; set; }
 
         // De to spillere som skal bruges i spillet.
-        Player playerA;
-        Player playerB;
+        TicTacToePlayer playerA;
+        TicTacToePlayer playerB;
 
         // bruges til at afgøre hvilken spillers tur det er - se nede i metode PlaceMark()
         public bool isItAsturn = true;
@@ -119,22 +119,22 @@ namespace spil
 
             // laver en ny instans af klassen player
             // og placerer brugerens valgte tegn i playerA.mark
-            playerA = new Player(playerAMark);
+            playerA = new TicTacToePlayer(playerAMark);
 
             Console.WriteLine();
             Console.WriteLine("Hvilket tegn bruger den anden spiller?");
             char playerBMark = Console.ReadKey().KeyChar;
-            playerB = new Player(playerBMark);
+            playerB = new TicTacToePlayer(playerBMark);
 
             //// er de forskellige?
             // sammenligner om de to spillerere har samme tegn.
             // hvis de har, bliver if-blokken startet
-            if (playerA.mark == playerB.mark)
+            if (playerA.Mark == playerB.Mark)
             {
                 Console.WriteLine();
                 Console.WriteLine("Du skal vælge noget andet end første spiller");
                 playerBMark = Console.ReadKey().KeyChar;
-                playerB.mark = playerBMark;
+                playerB.Mark = playerBMark;
             }
         }
 
@@ -153,8 +153,8 @@ namespace spil
             }
             else
             {
-                if (isItAsturn) mark = playerA.mark;
-                else mark = playerB.mark;
+                if (isItAsturn) mark = playerA.Mark;
+                else mark = playerB.Mark;
 
                 Console.WriteLine("Hvor vil du placere din brik?");
 
@@ -292,12 +292,12 @@ namespace spil
                     if (isItAsturn)
                     {
                         //char playerMark variablen bliver sat = henter propertien mark fra playerA
-                        playerMark = playerA.mark;
+                        playerMark = playerA.Mark;
                     }
                     else
                     {
                         // Se ovenstående kommentar
-                        playerMark = playerB.mark;
+                        playerMark = playerB.Mark;
                     }
                     //såfremt det chosenBlock altså det valgte felt i vores GameBoard array
                     //er fyldt ud af spillerens egen brik så aktiveres if statementen
