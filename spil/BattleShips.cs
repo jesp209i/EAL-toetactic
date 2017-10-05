@@ -1,7 +1,7 @@
 ﻿using System;
 namespace spil
 {
-    internal class BattleShips
+    public class BattleShips
     {
         public char[,] GameBoardOfPlayerA { get; set; }
         public char[,] GameBoardOfPlayerB { get; set; }
