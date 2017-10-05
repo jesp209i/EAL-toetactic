@@ -50,7 +50,7 @@ namespace spil
             {
                 for (int i = 0; i < lengthOfShip; i++)
                 {
-                    if (activeGameBoard[xKoordinat + (i*retning) , yKoordinat] != ' ' || xKoordinat + (i * retning) < 0)
+                    if (activeGameBoard[xKoordinat + (i*retning) , yKoordinat] != ' ' || xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
                     {
                         return false;
                     }
@@ -64,7 +64,7 @@ namespace spil
             {
                 for (int i = 0; i < lengthOfShip; i++)
                 {
-                    if (activeGameBoard[xKoordinat , yKoordinat + (i*retning)] != ' ' || yKoordinat + ( i * retning) < 0)
+                    if (activeGameBoard[xKoordinat , yKoordinat + (i*retning)] != ' ' || yKoordinat + ( i * retning) < 0 || yKoordinat + (i * retning) > 9)
                     {
                         return false;
                     }
