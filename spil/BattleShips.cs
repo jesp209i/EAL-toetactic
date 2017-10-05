@@ -37,6 +37,45 @@ namespace spil
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
             };
         }
+        public bool ValidateShipDirection(int xKoordinat, int yKoordinat, int lengthOfShip, char directionOfShip)
+        {
+            bool isTheDirectionValid = true;
+            int retning = 1;
+            if (directionOfShip == 'w' || directionOfShip == 's')
+            {
+                retning = -1;
+            }
+
+            if (directionOfShip == 'w' || directionOfShip == 'e')
+            {
+                for (int i = 0; i < lengthOfShip; i++)
+                {
+                    if (activeGameBoard[xKoordinat + (i*retning) , yKoordinat] != ' ' || xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                isTheDirectionValid = true;
+            }
+            if (directionOfShip == 'n' || directionOfShip == 's')
+            {
+                for (int i = 0; i < lengthOfShip; i++)
+                {
+                    if (activeGameBoard[xKoordinat , yKoordinat + (i*retning)] != ' ' || yKoordinat + ( i * retning) < 0 || yKoordinat + (i * retning) > 9)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                isTheDirectionValid = true;
+            }
+            return isTheDirectionValid;
+        }
         public string GetBattleShipsGameBoardView()
         {
 
@@ -94,6 +133,7 @@ namespace spil
             }
         }
 
+
         public bool ValidatePlacement(int xKoordinat, int yKoordinat)
         {
             if (activeGameBoard[xKoordinat, yKoordinat] == ' ')
@@ -105,5 +145,6 @@ namespace spil
                 return false;
             }
         }
+
     }
 }

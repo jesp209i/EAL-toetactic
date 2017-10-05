@@ -57,7 +57,7 @@ namespace spil
 
         private void DoActionStartNormalGame()
         {
-             ticTacToe = new TicTacToe();
+            ticTacToe = new TicTacToe();
             ticTacToe.isVariation = false;
             ticTacToe.AddPlayers();
         }
