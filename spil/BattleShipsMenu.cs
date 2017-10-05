@@ -53,7 +53,12 @@ namespace spil
         }
         private void StartBattleShipsNormalGame()
         {
-            Console.WriteLine("Koden for oprettelse af nyt spil");
+            Console.Clear();
+            BattleShips battleShips = new BattleShips();
+            battleShips.activeGameBoard = battleShips.GameBoardOfPlayerA;
+            Console.WriteLine("Placer skibe");
+            Console.WriteLine(battleShips.GetBattleShipsGameBoardView());
+            Console.WriteLine();
             Console.ReadKey();
         }
         private void StartBattleShipsVariationGame()
