@@ -23,7 +23,7 @@ namespace spil
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
             };
-            GameBoardOfPlayerB = new char[10, 10] 
+            GameBoardOfPlayerB = new char[10, 10]
             {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -123,8 +123,8 @@ namespace spil
             int yKoordinat;
             if (firstPlacement.Length == 2 && int.TryParse(firstPlacement, out int s))
             {
-                xKoordinat = (int) firstPlacement[0];
-                yKoordinat = (int) firstPlacement[1];
+                xKoordinat = (int)firstPlacement[0];
+                yKoordinat = (int)firstPlacement[1];
 
             }
             else
@@ -132,5 +132,19 @@ namespace spil
                 Console.WriteLine("Ugyldigt");
             }
         }
+
+
+        public bool ValidatePlacement(int xKoordinat, int yKoordinat)
+        {
+            if (activeGameBoard[xKoordinat, yKoordinat] == ' ')
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
