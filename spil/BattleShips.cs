@@ -1,6 +1,6 @@
 ﻿namespace spil
 {
-    internal class BattleShips
+    public class BattleShips
     {
         public string GetBattleShipsGameBoardView()
         {

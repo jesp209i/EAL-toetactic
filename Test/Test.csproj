@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="TicTacToeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BattleShipsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\spil\spil.csproj">
