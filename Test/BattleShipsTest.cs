@@ -121,5 +121,26 @@ namespace Test
         //    CollectionAssert.AreEqual(expected, battleShipsTest.activeGameBoard);
 
         //}
+        [TestMethod]
+        public void CanPlacePartOfBattleship()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.activeGameBoard = battleShipsTest.GameBoardOfPlayerA;
+            battleShipsTest.PlacePartOfBattleship(3, 2);
+            char[,] expected = new char[10, 10]
+        {
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        };
+            CollectionAssert.AreEqual(expected, battleShipsTest.activeGameBoard);
+        }
     }
 }
