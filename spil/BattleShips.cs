@@ -50,9 +50,16 @@ namespace spil
             {
                 for (int i = 0; i < lengthOfShip; i++)
                 {
-                    if (activeGameBoard[xKoordinat + (i*retning) , yKoordinat] != ' ' || xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+                    if (xKoordinat + (i * retning) < 0 || xKoordinat + (i * retning) > 9)
                     {
                         return false;
+                    }
+                    else
+                    {
+                        if (activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ')
+                        {
+                            return false;
+                        }
                     }
                 }
             }
@@ -64,9 +71,16 @@ namespace spil
             {
                 for (int i = 0; i < lengthOfShip; i++)
                 {
-                    if (activeGameBoard[xKoordinat , yKoordinat + (i*retning)] != ' ' || yKoordinat + ( i * retning) < 0 || yKoordinat + (i * retning) > 9)
+                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
                     {
                         return false;
+                    }
+                    else
+                    {
+                        if (activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ')
+                        {
+                            return false;
+                        }
                     }
                 }
             }
@@ -115,34 +129,109 @@ namespace spil
             return getPlayerName;
         }
 
-        public void PlaceShip(string shipName, int shipLength)
+        public void PlaceShip(string shipName, int xKoordinat, int yKoordinat, int shipLength, int brugerinput)
         {
-            Console.WriteLine("Indtast X og Y koordinater for stævnen på " + shipName);
-            string firstPlacement = Console.ReadLine();
-            int xKoordinat;
-            int yKoordinat;
-            if (firstPlacement.Length == 2 && int.TryParse(firstPlacement, out int s))
+            string xKoordinatstring = Console.ReadLine();
+            //if (xKoordinatstring != "0" ||
+            //    xKoordinatstring != "1" ||
+            //    xKoordinatstring != "2" ||
+            //    xKoordinatstring != "3" ||
+            //    xKoordinatstring != "4" ||
+            //    xKoordinatstring != "5" ||
+            //    xKoordinatstring != "6" ||
+            //    xKoordinatstring != "7" ||
+            //    xKoordinatstring != "8" ||
+            //    xKoordinatstring != "9")
+            //{
+            //    Console.WriteLine("Du må kun skrive et enkelt tal");
+            //    Console.ReadKey();
+            //}
+            //else
+            //{
+            //    int xKoordinat = Convert.ToInt32(xKoordinatstring);
+            //    string yKoordinatstring = Console.ReadLine();
+            //    if (yKoordinatstring != "0" ||
+            //        yKoordinatstring != "1" ||
+            //        yKoordinatstring != "2" ||
+            //        yKoordinatstring != "3" ||
+            //        yKoordinatstring != "4" ||
+            //        yKoordinatstring != "5" ||
+            //        yKoordinatstring != "6" ||
+            //        yKoordinatstring != "7" ||
+            //        yKoordinatstring != "8" ||
+            //        yKoordinatstring != "9")
+            //    {
+            //        Console.WriteLine("Du må kun skrive et enkelt tal");
+            //        Console.ReadKey();
+            //    }
+            //    else
+            //    {
+            //        int yKoordinat = Convert.ToInt32(yKoordinatstring);
+            bool isEastClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'e');
+            bool isWestClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'w');
+            bool isNorthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'n');
+            bool isSouthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 's');
+            bool canPlaceEast = false;
+            bool canPlaceWest = false;
+            bool canPlaceNorth = false;
+            bool canPlaceSouth = false;
+            if (!isEastClear && !isWestClear && !isNorthClear && !isSouthClear)
             {
-                xKoordinat = (int)firstPlacement[0];
-                yKoordinat = (int)firstPlacement[1];
-
+                Console.WriteLine("Der er ikke plads til skibet her!");
+                Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Ugyldigt");
-            }
-        }
+                if (isEastClear)
+                {
+                    canPlaceEast = true;
+                    Console.WriteLine("Tast 1 for at placerer skibet mod øst");
+                }
+                if (isWestClear)
+                {
+                    canPlaceWest = true;
+                    Console.WriteLine("Tast 2 for at placerer skibet mod vest");
+                }
+                if (isNorthClear)
+                {
+                    canPlaceNorth = true;
+                    Console.WriteLine("Tast 3 for at placerer skibet mod nord");
+                }
+                if (isSouthClear)
+                {
+                    canPlaceSouth = true;
+                    Console.WriteLine("Tast 4 for at placerer skibet mod syd");
+                    if (brugerinput == 1 && canPlaceEast)
+                    {
+                        for (int i = 0; i <= shipLength; i++)
+                        {
+                            //PlacePartOfBattleship(xKoordinat + i, yKoordinat);
+                        }
+                    }
 
+                    if (brugerinput == 2 && canPlaceWest)
+                    {
+                        for (int i = 0; i <= shipLength; i++)
+                        {
+                            //PlacePartOfBattleship(xKoordinat - i, yKoordinat);
+                        }
+                    }
 
-        public bool ValidatePlacement(int xKoordinat, int yKoordinat)
-        {
-            if (activeGameBoard[xKoordinat, yKoordinat] == ' ')
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                    if (brugerinput == 3 && canPlaceNorth)
+                    {
+                        for (int i = 0; i <= shipLength; i++)
+                        {
+                            //PlacePartOfBattleship(xKoordinat, yKoordinat + i);
+                        }
+                    }
+                    if (brugerinput == 4 && canPlaceSouth)
+                    {
+                        for (int i = 0; i <= shipLength; i++)
+                        {
+                            //PlacePartOfBattleship(xKoordinat, yKoordinat - i);
+                        }
+                    }
+                }
             }
         }
 
