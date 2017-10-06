@@ -129,9 +129,9 @@ namespace spil
             return getPlayerName;
         }
 
-        public void PlaceShip(string shipName, int xKoordinat, int yKoordinat, int shipLength, int brugerinput)
+        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipdirection)
         {
-            string xKoordinatstring = Console.ReadLine();
+            //string xKoordinatstring = Console.ReadLine();
             //if (xKoordinatstring != "0" ||
             //    xKoordinatstring != "1" ||
             //    xKoordinatstring != "2" ||
@@ -171,10 +171,6 @@ namespace spil
             bool isWestClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'w');
             bool isNorthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'n');
             bool isSouthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 's');
-            bool canPlaceEast = false;
-            bool canPlaceWest = false;
-            bool canPlaceNorth = false;
-            bool canPlaceSouth = false;
             if (!isEastClear && !isWestClear && !isNorthClear && !isSouthClear)
             {
                 Console.WriteLine("Der er ikke plads til skibet her!");
@@ -184,51 +180,45 @@ namespace spil
             {
                 if (isEastClear)
                 {
-                    canPlaceEast = true;
                     Console.WriteLine("Tast 1 for at placerer skibet mod øst");
+                    if (shipdirection == 1)
+                    {
+                        for (int i = 0; i <= shipLength; i++)
+                        {
+                            PlacePartOfBattleship(xKoordinat + i, yKoordinat);
+                        }
+                    }
                 }
                 if (isWestClear)
                 {
-                    canPlaceWest = true;
                     Console.WriteLine("Tast 2 for at placerer skibet mod vest");
+                    if (shipdirection == 2)
+                    {
+                        for (int i = 0; i <= shipLength; i++)
+                        {
+                            PlacePartOfBattleship(xKoordinat - i, yKoordinat);
+                        }
+                    }
                 }
                 if (isNorthClear)
                 {
-                    canPlaceNorth = true;
                     Console.WriteLine("Tast 3 for at placerer skibet mod nord");
+                    if (shipdirection == 3)
+                    {
+                        for (int i = 0; i < shipLength; i++)
+                        {
+                            PlacePartOfBattleship(xKoordinat, yKoordinat + i);
+                        }
+                    }
                 }
                 if (isSouthClear)
                 {
-                    canPlaceSouth = true;
                     Console.WriteLine("Tast 4 for at placerer skibet mod syd");
-                    if (brugerinput == 1 && canPlaceEast)
+                    if (shipdirection == 4)
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
-                            //PlacePartOfBattleship(xKoordinat + i, yKoordinat);
-                        }
-                    }
-
-                    if (brugerinput == 2 && canPlaceWest)
-                    {
-                        for (int i = 0; i <= shipLength; i++)
-                        {
-                            //PlacePartOfBattleship(xKoordinat - i, yKoordinat);
-                        }
-                    }
-
-                    if (brugerinput == 3 && canPlaceNorth)
-                    {
-                        for (int i = 0; i <= shipLength; i++)
-                        {
-                            //PlacePartOfBattleship(xKoordinat, yKoordinat + i);
-                        }
-                    }
-                    if (brugerinput == 4 && canPlaceSouth)
-                    {
-                        for (int i = 0; i <= shipLength; i++)
-                        {
-                            //PlacePartOfBattleship(xKoordinat, yKoordinat - i);
+                            PlacePartOfBattleship(xKoordinat, yKoordinat - i);
                         }
                     }
                 }
