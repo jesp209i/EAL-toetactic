@@ -205,26 +205,26 @@ namespace spil
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
-                            PlacePartOfBattleship(xKoordinat + i, yKoordinat);
+                            //PlacePartOfBattleship(xKoordinat + i, yKoordinat);
                         }
                     }
 
-                    if (brugerinput == 1 && canPlaceWest)
+                    if (brugerinput == 2 && canPlaceWest)
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
-                            PlacePartOfBattleship(xKoordinat - i, yKoordinat);
+                            //PlacePartOfBattleship(xKoordinat - i, yKoordinat);
                         }
                     }
 
-                    if (brugerinput == 1 && canPlaceNorth)
+                    if (brugerinput == 3 && canPlaceNorth)
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
                             //PlacePartOfBattleship(xKoordinat, yKoordinat + i);
                         }
                     }
-                    if (brugerinput == 1 && canPlaceSouth)
+                    if (brugerinput == 4 && canPlaceSouth)
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
