@@ -234,5 +234,10 @@ namespace spil
                 }
             }
         }
+
+        public void PlacePartOfBattleship (int xKoordinat, int yKoordinat)
+        {
+            activeGameBoard[xKoordinat, yKoordinat] = '#';
+        }
     }
 }
