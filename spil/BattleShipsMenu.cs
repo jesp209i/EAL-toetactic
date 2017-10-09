@@ -61,7 +61,7 @@ namespace spil
         {
             Console.Clear();
             BattleShips battleShips = new BattleShips();
-            battleShips.activeGameBoard = battleShips.GameBoardOfPlayerA;
+            //battleShips.activeGameBoard = battleShips.GameBoardOfPlayerA;
             Console.WriteLine("Placer skibe");
             Console.WriteLine(battleShips.GetBattleShipsGameBoardView());
             Console.WriteLine();
