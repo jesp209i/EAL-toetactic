@@ -3,40 +3,17 @@ namespace spil
 {
     public class BattleShips
     {
-        public BattleShipsPlayer playerA;
-        public char[,] GameBoardOfPlayerA { get; set; }
-        public char[,] GameBoardOfPlayerB { get; set; }
+        public BattleShipsPlayer[] player;
+        public int BattleShipsPlayerTurn = 0;
+
+        //public char[,] GameBoardOfPlayerA { get; set; }
+        //public char[,] GameBoardOfPlayerB { get; set; }
 
         //char array variabel
         public char[,] activeGameBoard { get; set; }
         public BattleShips()
         {
-            GameBoardOfPlayerA = new char[10, 10]
-            {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            };
-            GameBoardOfPlayerB = new char[10, 10]
-            {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            };
+            player = new BattleShipsPlayer[2] {new BattleShipsPlayer(), new BattleShipsPlayer()};
         }
         public bool ValidateShipDirection(int xKoordinat, int yKoordinat, int lengthOfShip, char directionOfShip)
         {
@@ -50,7 +27,7 @@ namespace spil
             if (directionOfShip == 'w' || directionOfShip == 'e')
             {
                 for (int i = 0; i < lengthOfShip; i++)
-                
+                { 
                     if (activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ' || xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
 
                     {
@@ -73,9 +50,7 @@ namespace spil
             {
                 for (int i = 0; i < lengthOfShip; i++)
                 {
-
                     if (activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ' || yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
-
                     {
                         return false;
                     }
@@ -243,6 +218,70 @@ namespace spil
                 intToPrint = Console.ReadKey().KeyChar;
             } while (!char.IsNumber(intToPrint));
             return Convert.ToInt32(intToPrint);
+        }
+
+        public bool FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
+        {
+            bool isShotsSuccessful = false;
+            char charOnGameBoard;
+            charOnGameBoard = ValidatePlacement(xKoordinat, yKoordinat);
+            if (BattleShipsPlayerTurn == 0)
+            {
+                if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
+                {
+                    //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
+                    int positionInArray = Array.IndexOf(player[1].shipChar, charOnGameBoard);
+                    player[1].shipLengths[positionInArray] -= 1;
+                    player[1].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
+                    player[0].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
+                    Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
+                    Console.ReadKey();
+                    isShotsSuccessful = true;
+                }
+                if (charOnGameBoard == ' ')
+                {
+                    player[1].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
+                    player[0].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
+                    Console.WriteLine("Plask!...\"Kaptajn, det var en misser\"");
+                    Console.ReadKey();
+                    isShotsSuccessful = true;
+                }
+                if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
+                {
+                    Console.WriteLine("Du har allerede skudt der. Men det er godt at være sikker, i guess");
+                    Console.ReadKey();
+                    isShotsSuccessful = false;
+                }
+            }
+            if (BattleShipsPlayerTurn == 1)
+            {
+                if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
+                {
+                    //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
+                    int positionInArray = Array.IndexOf(player[1].shipChar, charOnGameBoard);
+                    player[0].shipLengths[positionInArray] -= 1;
+                    player[0].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
+                    player[1].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
+                    Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
+                    Console.ReadKey();
+                    isShotsSuccessful = true;
+                }
+                if (charOnGameBoard == ' ')
+                {
+                    player[0].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
+                    player[1].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
+                    Console.WriteLine("Plask!...\"Kaptajn, det var en misser\"");
+                    Console.ReadKey();
+                    isShotsSuccessful = true;
+                }
+                if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
+                {
+                    Console.WriteLine("Du har allerede skudt der. Men det er godt at være sikker, i guess");
+                    Console.ReadKey();
+                    isShotsSuccessful = false; 
+                }
+            }
+            return isShotsSuccessful;
         }
     }
 }

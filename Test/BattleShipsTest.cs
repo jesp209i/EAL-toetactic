@@ -125,7 +125,7 @@ namespace Test
         public void CanPlacePartOfBattleship()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = battleShipsTest.GameBoardOfPlayerA;
+            //battleShipsTest.activeGameBoard = battleShipsTest.GameBoardOfPlayerA;
             battleShipsTest.PlacePartOfBattleship(3, 2);
             char[,] expected = new char[10, 10]
         {
