@@ -225,9 +225,20 @@ namespace spil
             }
         }
 
-        public void PlacePartOfBattleship (int xKoordinat, int yKoordinat)
+        public void PlacePartOfBattleship(int xKoordinat, int yKoordinat)
         {
             activeGameBoard[xKoordinat, yKoordinat] = '#';
+        }
+
+        public int GetNumberFromPlayer()
+        {
+            char intToPrint;
+            do
+            {
+                Console.WriteLine("Du skal skrive et tal.");
+                intToPrint = Console.ReadKey().KeyChar;
+            } while (!char.IsNumber(intToPrint));
+            return Convert.ToInt32(intToPrint);
         }
     }
 }
