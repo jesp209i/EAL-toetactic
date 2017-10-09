@@ -234,9 +234,18 @@ namespace spil
                     player[1].shipLengths[positionInArray] -= 1;
                     player[1].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
                     player[0].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
-                    Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
-                    Console.ReadKey();
-                    isShotsSuccessful = true;
+                    if (IsShipGone(charOnGameBoard))
+                    {
+                        Console.WriteLine("Sunket \"Kaptajn, vi har sunket et skib!\"");
+                        Console.ReadKey();
+                        isShotsSuccessful = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
+                        Console.ReadKey();
+                        isShotsSuccessful = true;
+                    }
                 }
                 if (charOnGameBoard == ' ')
                 {
@@ -262,9 +271,18 @@ namespace spil
                     player[0].shipLengths[positionInArray] -= 1;
                     player[0].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
                     player[1].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
-                    Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
-                    Console.ReadKey();
-                    isShotsSuccessful = true;
+                    if (IsShipGone(charOnGameBoard))
+                    {
+                        Console.WriteLine("Sunket \"Kaptajn, vi har sunket et skib!\"");
+                        Console.ReadKey();
+                        isShotsSuccessful = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
+                        Console.ReadKey();
+                        isShotsSuccessful = true;
+                    }
                 }
                 if (charOnGameBoard == ' ')
                 {
