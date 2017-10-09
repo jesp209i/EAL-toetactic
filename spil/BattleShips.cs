@@ -231,15 +231,26 @@ namespace spil
             bool isShotsSuccessful = false;
             char charOnGameBoard;
             charOnGameBoard = ValidatePlacement(xKoordinat, yKoordinat);
+            int currentPlayer;
+            int opponentPlayer;
+
             if (BattleShipsPlayerTurn == 0)
             {
+                currentPlayer = 0;
+                opponentPlayer = 1;
+            }
+            else
+            {
+                currentPlayer = 1;
+                opponentPlayer = 0;
+            }
                 if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
                 {
                     //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
                     int positionInArray = Array.IndexOf(player[1].shipChar, charOnGameBoard);
-                    player[1].shipLengths[positionInArray] -= 1;
-                    player[1].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
-                    player[0].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
+                    player[opponentPlayer].shipLengths[positionInArray] -= 1;
+                    player[opponentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
+                    player[currentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
                     if (IsShipGone(charOnGameBoard))
                     {
                         Console.WriteLine("Sunket \"Kaptajn, vi har sunket et skib!\"");
@@ -255,8 +266,8 @@ namespace spil
                 }
                 if (charOnGameBoard == ' ')
                 {
-                    player[1].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
-                    player[0].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
+                    player[opponentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
+                    player[currentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
                     Console.WriteLine("Plask!...\"Kaptajn, det var en misser\"");
                     Console.ReadKey();
                     isShotsSuccessful = true;
@@ -267,44 +278,6 @@ namespace spil
                     Console.ReadKey();
                     isShotsSuccessful = false;
                 }
-            }
-            if (BattleShipsPlayerTurn == 1)
-            {
-                if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
-                {
-                    //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
-                    int positionInArray = Array.IndexOf(player[1].shipChar, charOnGameBoard);
-                    player[0].shipLengths[positionInArray] -= 1;
-                    player[0].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
-                    player[1].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
-                    if (IsShipGone(charOnGameBoard))
-                    {
-                        Console.WriteLine("Sunket \"Kaptajn, vi har sunket et skib!\"");
-                        Console.ReadKey();
-                        isShotsSuccessful = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
-                        Console.ReadKey();
-                        isShotsSuccessful = true;
-                    }
-                }
-                if (charOnGameBoard == ' ')
-                {
-                    player[0].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
-                    player[1].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
-                    Console.WriteLine("Plask!...\"Kaptajn, det var en misser\"");
-                    Console.ReadKey();
-                    isShotsSuccessful = true;
-                }
-                if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
-                {
-                    Console.WriteLine("Du har allerede skudt der. Men det er godt at være sikker, i guess");
-                    Console.ReadKey();
-                    isShotsSuccessful = false; 
-                }
-            }
             return isShotsSuccessful;
         }
         public char ValidatePlacement(int xKordiant, int yKoordinat)
