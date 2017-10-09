@@ -50,8 +50,8 @@ namespace spil
             if (directionOfShip == 'w' || directionOfShip == 'e')
             {
                 for (int i = 0; i < lengthOfShip; i++)
-                
-                    if (activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ' || xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+                {
+                    if ( xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 ||activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ')
 
                     {
                         return false;
@@ -74,7 +74,7 @@ namespace spil
                 for (int i = 0; i < lengthOfShip; i++)
                 {
 
-                    if (activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ' || yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9|| activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ' )
 
                     {
                         return false;
@@ -133,7 +133,7 @@ namespace spil
             return getPlayerName;
         }
 
-        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipdirection)
+        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipdirection, char shipLetter)
         {
             //string xKoordinatstring = Console.ReadLine();
             //if (xKoordinatstring != "0" ||
@@ -189,7 +189,7 @@ namespace spil
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
-                            PlacePartOfBattleship(xKoordinat + i, yKoordinat);
+                            PlacePartOfBattleship(xKoordinat + i, yKoordinat, shipLetter);
                         }
                     }
                 }
@@ -200,7 +200,7 @@ namespace spil
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
-                            PlacePartOfBattleship(xKoordinat - i, yKoordinat);
+                            PlacePartOfBattleship(xKoordinat - i, yKoordinat, shipLetter);
                         }
                     }
                 }
@@ -211,7 +211,7 @@ namespace spil
                     {
                         for (int i = 0; i < shipLength; i++)
                         {
-                            PlacePartOfBattleship(xKoordinat, yKoordinat + i);
+                            PlacePartOfBattleship(xKoordinat, yKoordinat + i, shipLetter);
                         }
                     }
                 }
@@ -222,16 +222,16 @@ namespace spil
                     {
                         for (int i = 0; i <= shipLength; i++)
                         {
-                            PlacePartOfBattleship(xKoordinat, yKoordinat - i);
+                            PlacePartOfBattleship(xKoordinat, yKoordinat - i, shipLetter);
                         }
                     }
                 }
             }
         }
 
-        public void PlacePartOfBattleship(int xKoordinat, int yKoordinat)
+        public void PlacePartOfBattleship(int xKoordinat, int yKoordinat, char shipLetter)
         {
-            activeGameBoard[xKoordinat, yKoordinat] = '#';
+            activeGameBoard[xKoordinat, yKoordinat] = shipLetter;
         }
 
         public int GetNumberFromPlayer()
@@ -243,6 +243,11 @@ namespace spil
                 intToPrint = Console.ReadKey().KeyChar;
             } while (!char.IsNumber(intToPrint));
             return Convert.ToInt32(intToPrint);
+        }
+
+        public char ValidatePlacement(int xKordiant, int yKoordinat)
+        { 
+             return activeGameBoard[xKordiant, yKoordinat];
         }
     }
 }
