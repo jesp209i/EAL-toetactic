@@ -1,22 +1,12 @@
 ﻿namespace spil
 {
-    internal class BattleShipsPlayer
+    public class BattleShipsPlayer
     {
-        public string[] hangar = new string[5];
-        public string[] slagSkib1 = new string[4];
-        public string[] slagSkib2 = new string[4];
-        public string[] destroyer1 = new string[3];
-        public string[] destroyer2 = new string[3];
-        public string[] ubaad = new string[3];
-        public string[] patruljebåd1 = new string[2];
-        public string[] patruljebåd2 = new string[2];
-        public string[] patruljebåd3 = new string[2];
+        public int[] shipLengths = new int[9] { 2, 2, 2, 3, 3, 3, 4, 4, 5 };
+        public char[] shipChar = new char[9] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' };
+        public string[] shipNames = new string[9] { "Patruljebåd", "Patruljebåd", "Patruljebåd", "Ubåd", "Destroyer", "Destroyer", "Slagskib", "Slagskib", "Hangarskib" };
         public string name;
-        public string Name 
-            { 
-            get { return this.name; }
-            set { this.name = value; }
-            }
+
 
     }
 }

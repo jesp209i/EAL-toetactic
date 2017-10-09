@@ -3,6 +3,7 @@ namespace spil
 {
     public class BattleShips
     {
+        public BattleShipsPlayer playerA;
         public char[,] GameBoardOfPlayerA { get; set; }
         public char[,] GameBoardOfPlayerB { get; set; }
 
@@ -49,8 +50,9 @@ namespace spil
             if (directionOfShip == 'w' || directionOfShip == 'e')
             {
                 for (int i = 0; i < lengthOfShip; i++)
-                {
-                    if (xKoordinat + (i * retning) < 0 || xKoordinat + (i * retning) > 9)
+                
+                    if (activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ' || xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+
                     {
                         return false;
                     }
@@ -71,7 +73,9 @@ namespace spil
             {
                 for (int i = 0; i < lengthOfShip; i++)
                 {
-                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+
+                    if (activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ' || yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9)
+
                     {
                         return false;
                     }
