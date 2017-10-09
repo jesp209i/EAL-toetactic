@@ -287,3 +287,21 @@ namespace spil
         }
     }
 }
+// TODO Needs to remove/refactor activeGameBoard, or find other solution, see line 293.
+// TODO Needs to track currentPlayer and opponent (maybe 'int's in BattleShips-class scope?)
+// TODO needs method to change player when turn is done. (maybe include a "smokescreen" here, when changing players?)
+// TODO needs method to update gameBoardsScreen with relevant information (ship placement and bombings).
+// TODO IsShipGone() method missing
+// TODO refactor FireShotsAtOppositePlayersBoardAndMarkMyShots() method - how can we make tests for it? - Is it doing too much?
+//               Can we reuse methods we've already made? (in short: almost!)
+// TODO method to check if game is done, and show winner.
+// 
+// Is anything missing?
+//
+// How can we tie everything nicely together?
+// Does everybody understand what's happening? (This is really Important!)
+// Presentation - what, what?
+//
+// Bonus -----
+// Refactor ValidateShipDirection() - method works, but can be much nicer!
+// Refactor PlaceShip() - method works, but can be much nicer!
