@@ -4,7 +4,8 @@ namespace spil
     public class BattleShips
     {
         public BattleShipsPlayer[] player;
-        public int BattleShipsPlayerTurn = 0;
+        public int battleShipCurrentPlayer = 0;
+        public int battleShipOppositePlayer = 1;
 
         //public char[,] GameBoardOfPlayerA { get; set; }
         //public char[,] GameBoardOfPlayerB { get; set; }
@@ -13,7 +14,7 @@ namespace spil
         public char[,] activeGameBoard { get; set; }
         public BattleShips()
         {
-            player = new BattleShipsPlayer[2] {new BattleShipsPlayer(), new BattleShipsPlayer()};
+            player = new BattleShipsPlayer[2] { new BattleShipsPlayer(), new BattleShipsPlayer() };
         }
         public bool ValidateShipDirection(int xKoordinat, int yKoordinat, int lengthOfShip, char directionOfShip)
         {
@@ -29,7 +30,7 @@ namespace spil
                 for (int i = 0; i < lengthOfShip; i++)
 
                 {
-                    if ( xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 ||activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ')
+                    if (xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 || activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ')
 
 
                     {
@@ -54,7 +55,7 @@ namespace spil
                 {
 
 
-                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9|| activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ' )
+                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 || activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ')
 
 
                     {
@@ -226,72 +227,75 @@ namespace spil
             return Convert.ToInt32(intToPrint);
         }
 
-        public bool FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
+        public int FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
         {
-            bool isShotsSuccessful = false;
+            int shotReport=0;
             char charOnGameBoard;
             charOnGameBoard = ValidatePlacement(xKoordinat, yKoordinat);
-            int currentPlayer;
-            int opponentPlayer;
-
-            if (BattleShipsPlayerTurn == 0)
+            if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
             {
-                currentPlayer = 0;
-                opponentPlayer = 1;
+                //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
+                int positionInArray = Array.IndexOf(player[battleShipOppositePlayer].shipChar, charOnGameBoard);
+                player[battleShipOppositePlayer].shipLengths[positionInArray] -= 1;
+                player[battleShipOppositePlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
+                player[battleShipCurrentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
+                if (IsShipGone(positionInArray))
+                {
+                    shotReport = 1; //sunket
+                }
+                else
+                {
+                    shotReport = 2; //ramt
+                }
+            }
+            if (charOnGameBoard == ' ')
+            {
+                player[battleShipOppositePlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
+                player[battleShipCurrentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
+                shotReport = 3; //plask
+            }
+            if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
+            {
+                shotReport = 4; //skudt to gange det samme sted
+            }
+            return shotReport;
+        }
+        public char ValidatePlacement(int xKordiant, int yKoordinat)
+        {
+            return activeGameBoard[xKordiant, yKoordinat];
+
+        }
+        public bool IsShipGone(int positionInArray)
+        {
+            bool returnValue;
+            if (player[battleShipOppositePlayer].shipLengths[positionInArray] < 1)
+            {
+                returnValue = true;
             }
             else
             {
-                currentPlayer = 1;
-                opponentPlayer = 0;
+                returnValue = false;
             }
-                if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
-                {
-                    //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
-                    int positionInArray = Array.IndexOf(player[1].shipChar, charOnGameBoard);
-                    player[opponentPlayer].shipLengths[positionInArray] -= 1;
-                    player[opponentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
-                    player[currentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
-                    if (IsShipGone(charOnGameBoard))
-                    {
-                        Console.WriteLine("Sunket \"Kaptajn, vi har sunket et skib!\"");
-                        Console.ReadKey();
-                        isShotsSuccessful = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
-                        Console.ReadKey();
-                        isShotsSuccessful = true;
-                    }
-                }
-                if (charOnGameBoard == ' ')
-                {
-                    player[opponentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
-                    player[currentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
-                    Console.WriteLine("Plask!...\"Kaptajn, det var en misser\"");
-                    Console.ReadKey();
-                    isShotsSuccessful = true;
-                }
-                if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
-                {
-                    Console.WriteLine("Du har allerede skudt der. Men det er godt at være sikker, i guess");
-                    Console.ReadKey();
-                    isShotsSuccessful = false;
-                }
-            return isShotsSuccessful;
+            return returnValue;
         }
-        public char ValidatePlacement(int xKordiant, int yKoordinat)
-        { 
-             return activeGameBoard[xKordiant, yKoordinat];
 
+        public void EndTurn()
+        {
+            if (battleShipCurrentPlayer == 0)
+            {
+                battleShipCurrentPlayer = 1;
+                battleShipOppositePlayer = 0;
+            }
+            else
+            {
+                battleShipCurrentPlayer = 0;
+                battleShipOppositePlayer = 1;
+            }
         }
     }
 }
 // TODO Needs to remove/refactor activeGameBoard, or find other solution, see line 293.
-// TODO Needs to track currentPlayer and opponent (maybe 'int's in BattleShips-class scope?)
-// TODO needs method to change player when turn is done. (maybe include a "smokescreen" here, when changing players?)
 // TODO needs method to update gameBoardsScreen with relevant information (ship placement and bombings).
-// TODO IsShipGone() method missing
 // TODO refactor FireShotsAtOppositePlayersBoardAndMarkMyShots() method - how can we make tests for it? - Is it doing too much?
 //               Can we reuse methods we've already made? (in short: almost!)
 // TODO method to check if game is done, and show winner.
