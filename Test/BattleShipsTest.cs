@@ -59,7 +59,7 @@ namespace Test
         public void VerifyInvalidShipPlacementOnOnGameBoard()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.player[battleShipsTest.battleShipsCurrentPlayer].GameBoardMyShips = new char[10, 10]
+            battleShipsTest.player[battleShipsTest.battleShipCurrentPlayer].GameBoardMyShips = new char[10, 10]
             {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -96,7 +96,7 @@ namespace Test
             };
             //PlaceShip(xKoordinat, yKoordinat, længde, shipdirection)
             battleShipsTest.PlaceShip(3, 3, 4, 3, '#');
-            CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipsCurrentPlayer].GameBoardMyShips);
+            CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipCurrentPlayer].GameBoardMyShips);
 
         }
         [TestMethod]
@@ -117,7 +117,7 @@ namespace Test
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
         };
-            CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipsCurrentPlayer].GameBoardMyShips);
+            CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipCurrentPlayer].GameBoardMyShips);
         }
     }
 }

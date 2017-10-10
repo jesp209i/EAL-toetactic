@@ -34,13 +34,13 @@ namespace spil
 
                 {
 
-                    if ( xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 ||player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
+                    if (xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 || player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
                     {
                         return false;
                     }
                     else
                     {
-                        if (player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
+                        if (player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
                         {
                             return false;
                         }
@@ -57,7 +57,7 @@ namespace spil
                 {
 
 
-                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9|| player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ' )
+                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 || player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ')
 
 
 
@@ -66,7 +66,7 @@ namespace spil
                     }
                     else
                     {
-                        if (player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ')
+                        if (player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ')
                         {
                             return false;
                         }
@@ -88,8 +88,8 @@ namespace spil
             for (int i = 0; i < 9; i++)
             {
                 int inverseI = 9 - i;
-            resultat += " " + inverseI +" | " + player[battleShipsCurrentPlayer].GameBoardMyShips[0, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[1, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[2, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[3, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[4, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[5, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[6, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[7, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[8, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[9, inverseI] + " |     " + inverseI +" | " + player[battleShipsCurrentPlayer].GameBoardMyShots[0, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[1, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[2, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[3, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[4, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[5, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[6, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[7, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[8, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[9, inverseI] + " | \n";
-            resultat += "   |___|___|___|___|___|___|___|___|___|___|       |___|___|___|___|___|___|___|___|___|___|\n";
+                resultat += " " + inverseI + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[0, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[1, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[2, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[3, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[4, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[5, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[6, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[7, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[8, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[9, inverseI] + " |     " + inverseI + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[0, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[1, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[2, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[3, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[4, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[5, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[6, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[7, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[8, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[9, inverseI] + " | \n";
+                resultat += "   |___|___|___|___|___|___|___|___|___|___|       |___|___|___|___|___|___|___|___|___|___|\n";
             }
             resultat += "    0   1   2   3   4   5   6   7   8   9    X       0   1   2   3   4   5   6   7   8   9   X";
 
@@ -202,7 +202,7 @@ namespace spil
 
         public void PlacePartOfBattleship(int xKoordinat, int yKoordinat, char shipLetter)
         {
-            player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = shipLetter;
+            player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = shipLetter;
         }
 
         public int GetNumberFromPlayer()
@@ -218,7 +218,7 @@ namespace spil
 
         public int FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
         {
-            int shotReport=0;
+            int shotReport = 0;
             char charOnGameBoard;
             charOnGameBoard = ValidatePlacement(xKoordinat, yKoordinat);
 
@@ -230,7 +230,6 @@ namespace spil
                 player[battleShipOppositePlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
                 player[battleShipCurrentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
                 if (IsShipGone(positionInArray))
-
                 {
                     shotReport = 1; //sunket
                 }
@@ -258,8 +257,8 @@ namespace spil
         }
 
         public char ValidatePlacement(int xKordiant, int yKoordinat)
-        { 
-             return player[battleShipsCurrentPlayer].GameBoardMyShips[xKordiant, yKoordinat];
+        {
+            return player[battleShipCurrentPlayer].GameBoardMyShips[xKordiant, yKoordinat];
 
         }
 
@@ -267,46 +266,48 @@ namespace spil
         {
             foreach (int oneShipLength in player[battleShipOppositePlayer].shipLengths)
             {
-                if(oneShipLength > 0)
+                if (oneShipLength > 0)
                 {
                     return false;
                 }
-                return true;
+                
 
                 //Console.WriteLine("Kaptajn " + player[battleShipCurrentPlayer].name + " Vi har sunket alle fjendtlige skibe og vundet slaget");
                 //Console.ReadKey();
-
-        public bool IsShipGone(int positionInArray)
-        {
-            bool returnValue;
-            if (player[battleShipOppositePlayer].shipLengths[positionInArray] < 1)
-            {
-                returnValue = true;
             }
-            else
-            {
-                returnValue = false;
-            }
-            return returnValue;
+            return true;
         }
+                public bool IsShipGone(int positionInArray)
+                {
+                    bool returnValue;
+                    if (player[battleShipOppositePlayer].shipLengths[positionInArray] < 1)
+                    {
+                        returnValue = true;
+                    }
+                    else
+                    {
+                        returnValue = false;
+                    }
+                    return returnValue;
+                }
 
 
-        public void EndTurn()
-        {
-            if (battleShipCurrentPlayer == 0)
-            {
-                battleShipCurrentPlayer = 1;
-                battleShipOppositePlayer = 0;
-            }
-            else
-            {
-                battleShipCurrentPlayer = 0;
-                battleShipOppositePlayer = 1;
+                public void EndTurn()
+                {
+                    if (battleShipCurrentPlayer == 0)
+                    {
+                        battleShipCurrentPlayer = 1;
+                        battleShipOppositePlayer = 0;
+                    }
+                    else
+                    {
+                        battleShipCurrentPlayer = 0;
+                        battleShipOppositePlayer = 1;
 
+                    }
+                }
             }
         }
-    }
-}
 // TODO Needs to remove/refactor activeGameBoard, or find other solution, see line 293.
 // TODO needs method to update gameBoardsScreen with relevant information (ship placement and bombings).
 // TODO refactor FireShotsAtOppositePlayersBoardAndMarkMyShots() method - how can we make tests for it? - Is it doing too much?
