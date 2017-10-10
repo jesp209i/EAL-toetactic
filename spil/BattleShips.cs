@@ -4,7 +4,8 @@ namespace spil
     public class BattleShips
     {
         public BattleShipsPlayer[] player;
-        public int BattleShipsPlayerTurn = 0;
+        public int battleShipCurrentPlayer = 0;
+        public int battleshipOppositePlayer = 1;
 
         //public char[,] GameBoardOfPlayerA { get; set; }
         //public char[,] GameBoardOfPlayerB { get; set; }
@@ -285,6 +286,18 @@ namespace spil
              return activeGameBoard[xKordiant, yKoordinat];
 
         }
+
+        public bool HasAnyoneWonTheGame()
+        {
+            foreach (int oneShipLength in player[battleshipOppositePlayer].shipLengths)
+            {
+                if (oneShipLength > 0)
+                {
+                    return false;
+                }
+            return true; 
+            }
+        }
     }
 }
 // TODO Needs to remove/refactor activeGameBoard, or find other solution, see line 293.
@@ -294,7 +307,6 @@ namespace spil
 // TODO IsShipGone() method missing
 // TODO refactor FireShotsAtOppositePlayersBoardAndMarkMyShots() method - how can we make tests for it? - Is it doing too much?
 //               Can we reuse methods we've already made? (in short: almost!)
-// TODO method to check if game is done, and show winner.
 // 
 // Is anything missing?
 //

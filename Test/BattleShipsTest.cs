@@ -125,8 +125,8 @@ namespace Test
         public void CanPlacePartOfBattleship()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = battleShipsTest.player[0].GameBoardMyShips;
-            battleShipsTest.PlacePartOfBattleship(3, 2,'#');
+            battleShipsTest.activeGameBoard = battleShipsTest.player[1].GameBoardMyShips;
+            battleShipsTest.PlacePartOfBattleship(3, 2, '#');
             char[,] expected = new char[10, 10]
         {
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -141,6 +141,11 @@ namespace Test
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
         };
             CollectionAssert.AreEqual(expected, battleShipsTest.activeGameBoard);
+        }
+        public void HasAnyoneWonTheGame()
+        {
+              
+            
         }
     }
 }
