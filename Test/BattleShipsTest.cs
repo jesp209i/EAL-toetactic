@@ -27,6 +27,22 @@ namespace Test
             Assert.AreEqual('x', battleShipsTest.ValidatePlacement(3, 2));
         }
         [TestMethod]
+        public void ShipIsNotGone()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            
+            Assert.AreEqual(false, battleShipsTest.IsShipGone(3));
+        }
+
+        [TestMethod]
+        public void ShipIsGone()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths[3] = 0;
+            Assert.AreEqual(true, battleShipsTest.IsShipGone(3));
+        }
+
+        [TestMethod]
         public void GameBoardSquareIsEmpty()
         {
             BattleShips battleShipsTest = new BattleShips();
