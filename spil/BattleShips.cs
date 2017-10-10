@@ -5,16 +5,9 @@ namespace spil
     {
         public BattleShipsPlayer[] player;
 
-
         public int battleShipCurrentPlayer = 0;
-
         public int battleShipOppositePlayer = 1;
 
-        //public char[,] GameBoardOfPlayerA { get; set; }
-        //public char[,] GameBoardOfPlayerB { get; set; }
-
-        //char array variabel
-        //public char[,] activeGameBoard { get; set; }
         public BattleShips()
         {
             player = new BattleShipsPlayer[2] { new BattleShipsPlayer(), new BattleShipsPlayer() };
@@ -83,7 +76,7 @@ namespace spil
         {
 
             string resultat = "";
-            resultat += "Y\n";
+            resultat += "Y   Dine skibe                                      Skyd efter din modstander\n";
             resultat += "   _________________________________________       _________________________________________\n";
             for (int i = 0; i < 9; i++)
             {
@@ -94,7 +87,6 @@ namespace spil
             resultat += "    0   1   2   3   4   5   6   7   8   9    X       0   1   2   3   4   5   6   7   8   9   X";
 
             return resultat;
-
         }
 
         public string GetPlayerName()
@@ -106,42 +98,6 @@ namespace spil
 
         public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipdirection, char shipLetter)
         {
-            //string xKoordinatstring = Console.ReadLine();
-            //if (xKoordinatstring != "0" ||
-            //    xKoordinatstring != "1" ||
-            //    xKoordinatstring != "2" ||
-            //    xKoordinatstring != "3" ||
-            //    xKoordinatstring != "4" ||
-            //    xKoordinatstring != "5" ||
-            //    xKoordinatstring != "6" ||
-            //    xKoordinatstring != "7" ||
-            //    xKoordinatstring != "8" ||
-            //    xKoordinatstring != "9")
-            //{
-            //    Console.WriteLine("Du må kun skrive et enkelt tal");
-            //    Console.ReadKey();
-            //}
-            //else
-            //{
-            //    int xKoordinat = Convert.ToInt32(xKoordinatstring);
-            //    string yKoordinatstring = Console.ReadLine();
-            //    if (yKoordinatstring != "0" ||
-            //        yKoordinatstring != "1" ||
-            //        yKoordinatstring != "2" ||
-            //        yKoordinatstring != "3" ||
-            //        yKoordinatstring != "4" ||
-            //        yKoordinatstring != "5" ||
-            //        yKoordinatstring != "6" ||
-            //        yKoordinatstring != "7" ||
-            //        yKoordinatstring != "8" ||
-            //        yKoordinatstring != "9")
-            //    {
-            //        Console.WriteLine("Du må kun skrive et enkelt tal");
-            //        Console.ReadKey();
-            //    }
-            //    else
-            //    {
-            //        int yKoordinat = Convert.ToInt32(yKoordinatstring);
             bool isEastClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'e');
             bool isWestClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'w');
             bool isNorthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'n');
@@ -251,11 +207,6 @@ namespace spil
             return shotReport;
         }
 
-        private bool IsShipGone(char charOnGameBoard)
-        {
-            throw new NotImplementedException();
-        }
-
         public char ValidatePlacement(int xKordiant, int yKoordinat)
         {
             return player[battleShipCurrentPlayer].GameBoardMyShips[xKordiant, yKoordinat];
@@ -270,49 +221,42 @@ namespace spil
                 {
                     return false;
                 }
-                
-
-                //Console.WriteLine("Kaptajn " + player[battleShipCurrentPlayer].name + " Vi har sunket alle fjendtlige skibe og vundet slaget");
-                //Console.ReadKey();
             }
             return true;
         }
-                public bool IsShipGone(int positionInArray)
-                {
-                    bool returnValue;
-                    if (player[battleShipOppositePlayer].shipLengths[positionInArray] < 1)
-                    {
-                        returnValue = true;
-                    }
-                    else
-                    {
-                        returnValue = false;
-                    }
-                    return returnValue;
-                }
+        public bool IsShipGone(int positionInArray)
+        {
+            bool returnValue;
+            if (player[battleShipOppositePlayer].shipLengths[positionInArray] < 1)
+            {
+                returnValue = true;
+            }
+            else
+            {
+                returnValue = false;
+            }
+            return returnValue;
+        }
 
 
-                public void EndTurn()
-                {
-                    if (battleShipCurrentPlayer == 0)
-                    {
-                        battleShipCurrentPlayer = 1;
-                        battleShipOppositePlayer = 0;
-                    }
-                    else
-                    {
-                        battleShipCurrentPlayer = 0;
-                        battleShipOppositePlayer = 1;
+        public void EndTurn()
+        {
+            if (battleShipCurrentPlayer == 0)
+            {
+                battleShipCurrentPlayer = 1;
+                battleShipOppositePlayer = 0;
+            }
+            else
+            {
+                battleShipCurrentPlayer = 0;
+                battleShipOppositePlayer = 1;
 
-                    }
-                }
             }
         }
-// TODO Needs to remove/refactor activeGameBoard, or find other solution, see line 293.
-// TODO needs method to update gameBoardsScreen with relevant information (ship placement and bombings).
+    }
+}
 // TODO refactor FireShotsAtOppositePlayersBoardAndMarkMyShots() method - how can we make tests for it? - Is it doing too much?
 //               Can we reuse methods we've already made? (in short: almost!)
-// TODO method to check if game is done, and show winner.
 // 
 // Is anything missing?
 //
