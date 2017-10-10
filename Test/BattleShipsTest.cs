@@ -11,7 +11,7 @@ namespace Test
         public void GameBoardSquareIsNotEmpty()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.player[1].GameBoardMyShips = new char[10, 10]
+            battleShipsTest.player[0].GameBoardMyShips = new char[10, 10]
             {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
