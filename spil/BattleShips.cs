@@ -287,19 +287,18 @@ namespace spil
              return activeGameBoard[xKordiant, yKoordinat];
 
         }
-        public void HasAnyoneWonTheGame()
+        public bool HasAnyoneWonTheGame()
         {
             foreach (int oneShipLength in player[battleShipOppositePlayer].shipLengths)
             {
-                if(oneShipLength == 0)
+                if(oneShipLength > 0)
                 {
-                    Console.WriteLine("Kaptajn" + player[battleShipCurrentPlayer].name + "Vi ha sunket alle fjendtlige skibe og vundet slaget");
-                    Console.ReadKey();
+                    return false;
                 }
-                else
-                {
-                    break;
-                }
+                return true;
+
+                //Console.WriteLine("Kaptajn " + player[battleShipCurrentPlayer].name + " Vi har sunket alle fjendtlige skibe og vundet slaget");
+                //Console.ReadKey();
             }
         }
     }
