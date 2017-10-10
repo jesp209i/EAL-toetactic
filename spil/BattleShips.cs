@@ -5,6 +5,7 @@ namespace spil
     {
         public BattleShipsPlayer[] player;
 
+
         public int battleShipCurrentPlayer = 0;
 
         public int battleShipOppositePlayer = 1;
@@ -261,6 +262,20 @@ namespace spil
              return player[battleShipsCurrentPlayer].GameBoardMyShips[xKordiant, yKoordinat];
 
         }
+
+        public bool HasAnyoneWonTheGame()
+        {
+            foreach (int oneShipLength in player[battleShipOppositePlayer].shipLengths)
+            {
+                if(oneShipLength > 0)
+                {
+                    return false;
+                }
+                return true;
+
+                //Console.WriteLine("Kaptajn " + player[battleShipCurrentPlayer].name + " Vi har sunket alle fjendtlige skibe og vundet slaget");
+                //Console.ReadKey();
+
         public bool IsShipGone(int positionInArray)
         {
             bool returnValue;
@@ -287,6 +302,7 @@ namespace spil
             {
                 battleShipCurrentPlayer = 0;
                 battleShipOppositePlayer = 1;
+
             }
         }
     }
