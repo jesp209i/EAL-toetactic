@@ -11,7 +11,7 @@ namespace Test
         public void GameBoardSquareIsNotEmpty()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = new char[10, 10]
+            battleShipsTest.player[1].GameBoardMyShips = new char[10, 10]
             {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -46,45 +46,20 @@ namespace Test
         public void GameBoardSquareIsEmpty()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = new char[10, 10]
-        {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-        };
+
             Assert.AreEqual(' ', battleShipsTest.ValidatePlacement(3, 2));
         }
         [TestMethod]
         public void CanVerifyThatShipCanBePlacedOnGameBoard()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = new char[10, 10]
-            {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            };
             Assert.AreEqual(true, battleShipsTest.ValidateShipDirection(3, 2, 5, 'n'));
         }
         [TestMethod]
         public void VerifyInvalidShipPlacementOnOnGameBoard()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = new char[10, 10]
+            battleShipsTest.player[battleShipsTest.battleShipsCurrentPlayer].GameBoardMyShips = new char[10, 10]
             {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -106,19 +81,6 @@ namespace Test
         public void SuccesfullyPlacedShip()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = new char[10, 10]
-            {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            };
             char[,] expected = new char[10, 10]
             {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -134,14 +96,13 @@ namespace Test
             };
             //PlaceShip(xKoordinat, yKoordinat, længde, shipdirection)
             battleShipsTest.PlaceShip(3, 3, 4, 3, '#');
-            CollectionAssert.AreEqual(expected, battleShipsTest.activeGameBoard);
+            CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipsCurrentPlayer].GameBoardMyShips);
 
         }
         [TestMethod]
         public void CanPlacePartOfBattleship()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.activeGameBoard = battleShipsTest.player[0].GameBoardMyShips;
             battleShipsTest.PlacePartOfBattleship(3, 2,'#');
             char[,] expected = new char[10, 10]
         {
@@ -156,7 +117,7 @@ namespace Test
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
         };
-            CollectionAssert.AreEqual(expected, battleShipsTest.activeGameBoard);
+            CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipsCurrentPlayer].GameBoardMyShips);
         }
     }
 }
