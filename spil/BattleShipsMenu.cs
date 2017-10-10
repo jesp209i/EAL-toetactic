@@ -8,7 +8,7 @@ namespace spil
 {
     class BattleShipsMenu
     {
-        BattleShips battleShips { get; set; }
+        BattleShips BattleShips { get; set; }
         public void Show()
         {
 
@@ -30,9 +30,9 @@ namespace spil
         private void ShowMenu()
         {
             Console.Clear();
-            if (battleShips != null)
+            if (BattleShips != null)
             {
-                Console.WriteLine(battleShips.GetBattleShipsGameBoardView());
+                Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
             }
             Console.WriteLine(" _______  _______  _______  _______  ___      _______  _______  __   __  ___   _______  _______ ");
             Console.WriteLine("|  _    ||   _   ||       ||       ||   |    |       ||       ||  | |  ||   | |       ||       |");
@@ -61,7 +61,7 @@ namespace spil
         {
             Console.Clear();
             BattleShips battleShips = new BattleShips();
-            //battleShips.activeGameBoard = battleShips.GameBoardOfPlayerA;
+            //BattleShips.activeGameBoard = BattleShips.GameBoardOfPlayerA;
             Console.WriteLine("Placer skibe");
             Console.WriteLine(battleShips.GetBattleShipsGameBoardView());
             Console.WriteLine();
