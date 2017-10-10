@@ -4,18 +4,20 @@ namespace spil
     public class BattleShips
     {
         public BattleShipsPlayer[] player;
-        public int BattleShipsPlayerTurn = 0;
+
+
         public int battleShipCurrentPlayer = 0;
+
         public int battleShipOppositePlayer = 1;
 
         //public char[,] GameBoardOfPlayerA { get; set; }
         //public char[,] GameBoardOfPlayerB { get; set; }
 
         //char array variabel
-        public char[,] activeGameBoard { get; set; }
+        //public char[,] activeGameBoard { get; set; }
         public BattleShips()
         {
-            player = new BattleShipsPlayer[2] {new BattleShipsPlayer(), new BattleShipsPlayer()};
+            player = new BattleShipsPlayer[2] { new BattleShipsPlayer(), new BattleShipsPlayer() };
         }
         public bool ValidateShipDirection(int xKoordinat, int yKoordinat, int lengthOfShip, char directionOfShip)
         {
@@ -31,15 +33,14 @@ namespace spil
                 for (int i = 0; i < lengthOfShip; i++)
 
                 {
-                    if ( xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 ||activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ')
 
-
+                    if ( xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 ||player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
                     {
                         return false;
                     }
                     else
                     {
-                        if (activeGameBoard[xKoordinat + (i * retning), yKoordinat] != ' ')
+                        if (player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
                         {
                             return false;
                         }
@@ -56,7 +57,8 @@ namespace spil
                 {
 
 
-                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9|| activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ' )
+                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9|| player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ' )
+
 
 
                     {
@@ -64,7 +66,7 @@ namespace spil
                     }
                     else
                     {
-                        if (activeGameBoard[xKoordinat, yKoordinat + (i * retning)] != ' ')
+                        if (player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ')
                         {
                             return false;
                         }
@@ -81,29 +83,15 @@ namespace spil
         {
 
             string resultat = "";
-            resultat = resultat + "Y\n";
-            resultat = resultat + "   ___________________________________________________________ \n";
-            resultat = resultat + "9 |  " + activeGameBoard[0, 9] + "  |  " + activeGameBoard[1, 9] + "  |  " + activeGameBoard[2, 9] + "  |  " + activeGameBoard[3, 9] + "  |  " + activeGameBoard[4, 9] + "  |  " + activeGameBoard[5, 9] + "  |  " + activeGameBoard[6, 9] + "  |  " + activeGameBoard[7, 9] + "  |  " + activeGameBoard[8, 9] + "  |  " + activeGameBoard[9, 9] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "8 |  " + activeGameBoard[0, 8] + "  |  " + activeGameBoard[1, 8] + "  |  " + activeGameBoard[2, 8] + "  |  " + activeGameBoard[3, 8] + "  |  " + activeGameBoard[4, 8] + "  |  " + activeGameBoard[5, 8] + "  |  " + activeGameBoard[6, 8] + "  |  " + activeGameBoard[7, 8] + "  |  " + activeGameBoard[8, 8] + "  |  " + activeGameBoard[9, 8] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "7 |  " + activeGameBoard[0, 7] + "  |  " + activeGameBoard[1, 7] + "  |  " + activeGameBoard[2, 7] + "  |  " + activeGameBoard[3, 7] + "  |  " + activeGameBoard[4, 7] + "  |  " + activeGameBoard[5, 7] + "  |  " + activeGameBoard[6, 7] + "  |  " + activeGameBoard[7, 7] + "  |  " + activeGameBoard[8, 7] + "  |  " + activeGameBoard[9, 7] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "6 |  " + activeGameBoard[0, 6] + "  |  " + activeGameBoard[1, 6] + "  |  " + activeGameBoard[2, 6] + "  |  " + activeGameBoard[3, 6] + "  |  " + activeGameBoard[4, 6] + "  |  " + activeGameBoard[5, 6] + "  |  " + activeGameBoard[6, 6] + "  |  " + activeGameBoard[7, 6] + "  |  " + activeGameBoard[8, 6] + "  |  " + activeGameBoard[9, 6] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "5 |  " + activeGameBoard[0, 5] + "  |  " + activeGameBoard[1, 5] + "  |  " + activeGameBoard[2, 5] + "  |  " + activeGameBoard[3, 5] + "  |  " + activeGameBoard[4, 5] + "  |  " + activeGameBoard[5, 5] + "  |  " + activeGameBoard[6, 5] + "  |  " + activeGameBoard[7, 5] + "  |  " + activeGameBoard[8, 5] + "  |  " + activeGameBoard[9, 5] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "4 |  " + activeGameBoard[0, 4] + "  |  " + activeGameBoard[1, 4] + "  |  " + activeGameBoard[2, 4] + "  |  " + activeGameBoard[3, 4] + "  |  " + activeGameBoard[4, 4] + "  |  " + activeGameBoard[5, 4] + "  |  " + activeGameBoard[6, 4] + "  |  " + activeGameBoard[7, 4] + "  |  " + activeGameBoard[8, 4] + "  |  " + activeGameBoard[9, 4] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "3 |  " + activeGameBoard[0, 3] + "  |  " + activeGameBoard[1, 3] + "  |  " + activeGameBoard[2, 3] + "  |  " + activeGameBoard[3, 3] + "  |  " + activeGameBoard[4, 3] + "  |  " + activeGameBoard[5, 3] + "  |  " + activeGameBoard[6, 3] + "  |  " + activeGameBoard[7, 3] + "  |  " + activeGameBoard[8, 3] + "  |  " + activeGameBoard[9, 3] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "2 |  " + activeGameBoard[0, 2] + "  |  " + activeGameBoard[1, 2] + "  |  " + activeGameBoard[2, 2] + "  |  " + activeGameBoard[3, 2] + "  |  " + activeGameBoard[4, 2] + "  |  " + activeGameBoard[5, 2] + "  |  " + activeGameBoard[6, 2] + "  |  " + activeGameBoard[7, 2] + "  |  " + activeGameBoard[8, 2] + "  |  " + activeGameBoard[9, 2] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "1 |  " + activeGameBoard[0, 1] + "  |  " + activeGameBoard[1, 1] + "  |  " + activeGameBoard[2, 1] + "  |  " + activeGameBoard[3, 1] + "  |  " + activeGameBoard[4, 1] + "  |  " + activeGameBoard[5, 1] + "  |  " + activeGameBoard[6, 1] + "  |  " + activeGameBoard[7, 1] + "  |  " + activeGameBoard[8, 1] + "  |  " + activeGameBoard[9, 1] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "0 |  " + activeGameBoard[0, 0] + "  |  " + activeGameBoard[1, 0] + "  |  " + activeGameBoard[2, 0] + "  |  " + activeGameBoard[3, 0] + "  |  " + activeGameBoard[4, 0] + "  |  " + activeGameBoard[5, 0] + "  |  " + activeGameBoard[6, 0] + "  |  " + activeGameBoard[7, 0] + "  |  " + activeGameBoard[8, 0] + "  |  " + activeGameBoard[9, 0] + "  |\n";
-            resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
-            resultat = resultat + "     0     1     2     3     4     5     6     7     8     9    X";
+            resultat += "Y\n";
+            resultat += "   _________________________________________       _________________________________________\n";
+            for (int i = 0; i < 9; i++)
+            {
+                int inverseI = 9 - i;
+            resultat += " " + inverseI +" | " + player[battleShipsCurrentPlayer].GameBoardMyShips[0, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[1, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[2, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[3, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[4, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[5, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[6, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[7, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[8, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShips[9, inverseI] + " |     " + inverseI +" | " + player[battleShipsCurrentPlayer].GameBoardMyShots[0, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[1, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[2, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[3, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[4, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[5, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[6, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[7, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[8, inverseI] + " | " + player[battleShipsCurrentPlayer].GameBoardMyShots[9, inverseI] + " | \n";
+            resultat += "   |___|___|___|___|___|___|___|___|___|___|       |___|___|___|___|___|___|___|___|___|___|\n";
+            }
+            resultat += "    0   1   2   3   4   5   6   7   8   9    X       0   1   2   3   4   5   6   7   8   9   X";
 
             return resultat;
 
@@ -214,7 +202,7 @@ namespace spil
 
         public void PlacePartOfBattleship(int xKoordinat, int yKoordinat, char shipLetter)
         {
-            activeGameBoard[xKoordinat, yKoordinat] = shipLetter;
+            player[battleShipsCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = shipLetter;
         }
 
         public int GetNumberFromPlayer()
@@ -228,65 +216,53 @@ namespace spil
             return Convert.ToInt32(intToPrint);
         }
 
-        public bool FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
+        public int FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
         {
-            bool isShotsSuccessful = false;
+            int shotReport=0;
             char charOnGameBoard;
             charOnGameBoard = ValidatePlacement(xKoordinat, yKoordinat);
-            int currentPlayer;
-            int opponentPlayer;
 
-            if (BattleShipsPlayerTurn == 0)
+            if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
             {
-                currentPlayer = 0;
-                opponentPlayer = 1;
+                //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
+                int positionInArray = Array.IndexOf(player[battleShipOppositePlayer].shipChar, charOnGameBoard);
+                player[battleShipOppositePlayer].shipLengths[positionInArray] -= 1;
+                player[battleShipOppositePlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
+                player[battleShipCurrentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
+                if (IsShipGone(positionInArray))
+
+                {
+                    shotReport = 1; //sunket
+                }
+                else
+                {
+                    shotReport = 2; //ramt
+                }
             }
-            else
+            if (charOnGameBoard == ' ')
             {
-                currentPlayer = 1;
-                opponentPlayer = 0;
+                player[battleShipOppositePlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
+                player[battleShipCurrentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
+                shotReport = 3; //plask
             }
-                if (charOnGameBoard != ' ' && charOnGameBoard != 'X' && charOnGameBoard != 'O')
-                {
-                    //checker shipChar array for position af skibs char. Så minusses der 1 fra shipLengths
-                    int positionInArray = Array.IndexOf(player[1].shipChar, charOnGameBoard);
-                    player[opponentPlayer].shipLengths[positionInArray] -= 1;
-                    player[opponentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'X';
-                    player[currentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'X';
-                    if (IsShipGone(charOnGameBoard))
-                    {
-                        Console.WriteLine("Sunket \"Kaptajn, vi har sunket et skib!\"");
-                        Console.ReadKey();
-                        isShotsSuccessful = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("BUM! \"Kaptajn, vi har ramt et skib\"");
-                        Console.ReadKey();
-                        isShotsSuccessful = true;
-                    }
-                }
-                if (charOnGameBoard == ' ')
-                {
-                    player[opponentPlayer].GameBoardMyShips[xKoordinat, yKoordinat] = 'O';
-                    player[currentPlayer].GameBoardMyShots[xKoordinat, yKoordinat] = 'O';
-                    Console.WriteLine("Plask!...\"Kaptajn, det var en misser\"");
-                    Console.ReadKey();
-                    isShotsSuccessful = true;
-                }
-                if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
-                {
-                    Console.WriteLine("Du har allerede skudt der. Men det er godt at være sikker, i guess");
-                    Console.ReadKey();
-                    isShotsSuccessful = false;
-                }
-            return isShotsSuccessful;
+            if (charOnGameBoard == 'X' || charOnGameBoard == 'O')
+            {
+                shotReport = 4; //skudt to gange det samme sted
+            }
+            return shotReport;
         }
+
+        private bool IsShipGone(char charOnGameBoard)
+        {
+            throw new NotImplementedException();
+        }
+
         public char ValidatePlacement(int xKordiant, int yKoordinat)
         { 
-             return activeGameBoard[xKordiant, yKoordinat];
+             return player[battleShipsCurrentPlayer].GameBoardMyShips[xKordiant, yKoordinat];
 
         }
+
         public bool HasAnyoneWonTheGame()
         {
             foreach (int oneShipLength in player[battleShipOppositePlayer].shipLengths)
@@ -299,15 +275,40 @@ namespace spil
 
                 //Console.WriteLine("Kaptajn " + player[battleShipCurrentPlayer].name + " Vi har sunket alle fjendtlige skibe og vundet slaget");
                 //Console.ReadKey();
+
+        public bool IsShipGone(int positionInArray)
+        {
+            bool returnValue;
+            if (player[battleShipOppositePlayer].shipLengths[positionInArray] < 1)
+            {
+                returnValue = true;
+            }
+            else
+            {
+                returnValue = false;
+            }
+            return returnValue;
+        }
+
+
+        public void EndTurn()
+        {
+            if (battleShipCurrentPlayer == 0)
+            {
+                battleShipCurrentPlayer = 1;
+                battleShipOppositePlayer = 0;
+            }
+            else
+            {
+                battleShipCurrentPlayer = 0;
+                battleShipOppositePlayer = 1;
+
             }
         }
     }
 }
 // TODO Needs to remove/refactor activeGameBoard, or find other solution, see line 293.
-// TODO Needs to track currentPlayer and opponent (maybe 'int's in BattleShips-class scope?)
-// TODO needs method to change player when turn is done. (maybe include a "smokescreen" here, when changing players?)
 // TODO needs method to update gameBoardsScreen with relevant information (ship placement and bombings).
-// TODO IsShipGone() method missing
 // TODO refactor FireShotsAtOppositePlayersBoardAndMarkMyShots() method - how can we make tests for it? - Is it doing too much?
 //               Can we reuse methods we've already made? (in short: almost!)
 // TODO method to check if game is done, and show winner.
