@@ -4,7 +4,8 @@ namespace spil
     public class BattleShips
     {
         public BattleShipsPlayer[] player;
-        public int BattleShipsPlayerTurn = 0;
+        public int battleShipsCurrentPLayer = 0;
+        public int battleShipOppositePlayer = 1;
 
         //public char[,] GameBoardOfPlayerA { get; set; }
         //public char[,] GameBoardOfPlayerB { get; set; }
@@ -80,6 +81,12 @@ namespace spil
 
             string resultat = "";
             resultat = resultat + "Y\n";
+            for (int i = 0; i < 9; i++)
+            {
+            this.player[battleShipsPlayerTurn].GameBoardMyShips[0,i]
+            this.player[battleShipPlayerTurn].GameBoardMyShots[0,i]
+            }
+            
             resultat = resultat + "   ___________________________________________________________ \n";
             resultat = resultat + "9 |  " + activeGameBoard[0, 9] + "  |  " + activeGameBoard[1, 9] + "  |  " + activeGameBoard[2, 9] + "  |  " + activeGameBoard[3, 9] + "  |  " + activeGameBoard[4, 9] + "  |  " + activeGameBoard[5, 9] + "  |  " + activeGameBoard[6, 9] + "  |  " + activeGameBoard[7, 9] + "  |  " + activeGameBoard[8, 9] + "  |  " + activeGameBoard[9, 9] + "  |\n";
             resultat = resultat + "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|\n";
