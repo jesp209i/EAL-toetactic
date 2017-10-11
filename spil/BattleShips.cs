@@ -98,61 +98,27 @@ namespace spil
 
         public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipdirection, char shipLetter)
         {
-            bool isEastClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'e');
-            bool isWestClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'w');
-            bool isNorthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 'n');
-            bool isSouthClear = ValidateShipDirection(xKoordinat, yKoordinat, shipLength, 's');
-            if (!isEastClear && !isWestClear && !isNorthClear && !isSouthClear)
+            int retningHorizontal = 0;
+            int retningVertical = 0;
+            if (shipdirection == 1) //øst
             {
-                Console.WriteLine("Der er ikke plads til skibet her!");
-                Console.ReadKey();
+                retningHorizontal = 1;
             }
-            else
+            if (shipdirection == 2) //vest
             {
-                if (isEastClear)
-                {
-                    Console.WriteLine("Tast 1 for at placerer skibet mod øst");
-                    if (shipdirection == 1)
-                    {
-                        for (int i = 0; i <= shipLength; i++)
-                        {
-                            PlacePartOfBattleship(xKoordinat + i, yKoordinat, shipLetter);
-                        }
-                    }
-                }
-                if (isWestClear)
-                {
-                    Console.WriteLine("Tast 2 for at placerer skibet mod vest");
-                    if (shipdirection == 2)
-                    {
-                        for (int i = 0; i <= shipLength; i++)
-                        {
-                            PlacePartOfBattleship(xKoordinat - i, yKoordinat, shipLetter);
-                        }
-                    }
-                }
-                if (isNorthClear)
-                {
-                    Console.WriteLine("Tast 3 for at placerer skibet mod nord");
-                    if (shipdirection == 3)
-                    {
-                        for (int i = 0; i < shipLength; i++)
-                        {
-                            PlacePartOfBattleship(xKoordinat, yKoordinat + i, shipLetter);
-                        }
-                    }
-                }
-                if (isSouthClear)
-                {
-                    Console.WriteLine("Tast 4 for at placerer skibet mod syd");
-                    if (shipdirection == 4)
-                    {
-                        for (int i = 0; i <= shipLength; i++)
-                        {
-                            PlacePartOfBattleship(xKoordinat, yKoordinat - i, shipLetter);
-                        }
-                    }
-                }
+                retningHorizontal = -1;
+            }
+            if (shipdirection == 3) //nord
+            {
+                retningVertical = 1;
+            }
+            if (shipdirection == 4) //syd
+            {
+                retningVertical = -1;
+            }
+            for (int i = 0; i < shipLength; i++)
+            {
+                PlacePartOfBattleship(xKoordinat + i * retningHorizontal, yKoordinat + i * retningVertical, shipLetter);
             }
         }
 
