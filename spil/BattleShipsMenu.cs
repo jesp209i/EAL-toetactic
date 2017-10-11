@@ -72,6 +72,74 @@ namespace spil
             Console.WriteLine("Koden for oprettelse af variation");
             Console.ReadKey();
         }
-        
+        private void PlayerShootsAtShips()
+        {
+
+            bool gameIsNotDone = true;
+            do
+            {
+                bool notReadyToEndTurn = true;
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+                    Console.WriteLine(BattleShips.player[BattleShips.battleShipCurrentPlayer].name + " Skyd mod din modstander:");
+                    Console.WriteLine("Skriv X koordinat");
+                    int xKoordinat = BattleShips.GetNumberFromPlayer();
+                    Console.WriteLine("\nSkriv Y koordinat");
+                    int yKoordinat = BattleShips.GetNumberFromPlayer();
+
+                    switch (BattleShips.FireShotsAtOppositePlayersBoardAndMarkMyShots(xKoordinat, yKoordinat))
+                    {
+                        case 1:
+                            Console.Clear();
+                            Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+                            Console.WriteLine("Kaptajn, du har sunket et skib!");
+                            notReadyToEndTurn = false;
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+                            Console.WriteLine("Splitte mine bramsejl, du har ramt et skib");
+                            notReadyToEndTurn = false;
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+                            Console.WriteLine("Det var uheldigvis en forbier... :( ");
+                            notReadyToEndTurn = false;
+                            break;
+                        case 4:
+                            Console.Clear();
+                            Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+                            Console.WriteLine("Du har allerede skudt der... Prøv igen, Snotskovl! :)");
+                            break;
+                    }
+                } while (notReadyToEndTurn);
+                if (BattleShips.HasAnyoneWonTheGame())
+                {
+                    this.WeHaveAWinner();
+                    gameIsNotDone = false;
+                }
+                else
+                {
+                    Console.WriteLine("Tryk en tast for at fortsætte.");
+                    Console.ReadKey();
+                    BattleShips.SmokeScreen();
+                    BattleShips.EndTurn();
+                }
+
+            } while (gameIsNotDone);
+
+        }
+
+        private void WeHaveAWinner()
+        {
+            Console.Clear();
+            Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+            Console.WriteLine("Tillykke Kaptajn " + BattleShips.player[BattleShips.battleShipCurrentPlayer].name + "!\nDu har vundet spillet!\nTryk en tast for at komme tilbage til menuen");
+            Console.ReadKey();
+            BattleShips = null;
+        }
     }
 }
