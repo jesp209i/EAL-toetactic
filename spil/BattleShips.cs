@@ -14,63 +14,44 @@ namespace spil
         }
         public bool ValidateShipDirection(int xKoordinat, int yKoordinat, int lengthOfShip, char directionOfShip)
         {
-            bool isTheDirectionValid = true;
-            int retning = 1;
-            if (directionOfShip == 'w' || directionOfShip == 's')
+            bool isClear = false;
+            int retningHorizontal = 0;
+            int retningVertical = 0;
+            if (directionOfShip == 'e')
             {
-                retning = -1;
+                retningHorizontal = 1;
             }
-
-            if (directionOfShip == 'w' || directionOfShip == 'e')
+            if (directionOfShip == 'w')
             {
-                for (int i = 0; i < lengthOfShip; i++)
-
+                retningHorizontal = -1;
+            }
+            if (directionOfShip == 'n')
+            {
+                retningVertical = 1;
+            }
+            if (directionOfShip == 's')
+            {
+                retningVertical = -1;
+            }
+            for (int i = 0; i < lengthOfShip; i++)
+            {
+                if (xKoordinat + i * retningHorizontal < 0 || xKoordinat + i * retningHorizontal > 9 ||yKoordinat + i *retningVertical < 0 || yKoordinat + i * retningVertical > 9)
                 {
-
-                    if (xKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 || player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
+                    return false;
+                }
+                else
+                {
+                    if (player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat + i * retningHorizontal, yKoordinat + i * retningVertical] == ' ')
                     {
-                        return false;
+                        isClear = true;
                     }
                     else
                     {
-                        if (player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat + (i * retning), yKoordinat] != ' ')
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                isTheDirectionValid = true;
-            }
-            if (directionOfShip == 'n' || directionOfShip == 's')
-            {
-                for (int i = 0; i < lengthOfShip; i++)
-                {
-
-
-                    if (yKoordinat + (i * retning) < 0 || yKoordinat + (i * retning) > 9 || player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ')
-
-
-
-                    {
                         return false;
                     }
-                    else
-                    {
-                        if (player[battleShipCurrentPlayer].GameBoardMyShips[xKoordinat, yKoordinat + (i * retning)] != ' ')
-                        {
-                            return false;
-                        }
-                    }
                 }
             }
-            else
-            {
-                isTheDirectionValid = true;
-            }
-            return isTheDirectionValid;
+            return isClear;
         }
         public string GetBattleShipsGameBoardView()
         {
@@ -96,7 +77,7 @@ namespace spil
             return getPlayerName;
         }
 
-        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipdirection, char shipLetter)
+        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shiipdirection, char shipletter)
         {
             int retningHorizontal = 0;
             int retningVertical = 0;
@@ -120,6 +101,7 @@ namespace spil
             {
                 PlacePartOfBattleship(xKoordinat + i * retningHorizontal, yKoordinat + i * retningVertical, shipLetter);
             }
+
         }
 
         public void PlacePartOfBattleship(int xKoordinat, int yKoordinat, char shipLetter)
