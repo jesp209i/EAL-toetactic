@@ -77,23 +77,23 @@ namespace spil
             return getPlayerName;
         }
 
-        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shiipdirection, char shipletter)
+        public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shipDirection, char shipLetter)
         {
             int retningHorizontal = 0;
             int retningVertical = 0;
-            if (shipdirection == 1) //øst
+            if (shipDirection == 1) //øst
             {
                 retningHorizontal = 1;
             }
-            if (shipdirection == 2) //vest
+            if (shipDirection == 2) //vest
             {
                 retningHorizontal = -1;
             }
-            if (shipdirection == 3) //nord
+            if (shipDirection == 3) //nord
             {
                 retningVertical = 1;
             }
-            if (shipdirection == 4) //syd
+            if (shipDirection == 4) //syd
             {
                 retningVertical = -1;
             }
@@ -115,18 +115,18 @@ namespace spil
             do
             {
             string userInput = Console.ReadLine();
-            if (int.TryParse(userInput, out int numberFromPlayer) && userInput.Length == 1 && numberFromPlayer > -1)
-            {
-                numberIsNotOk = false;
-                
-            }
-            else
-            {
-                Console.WriteLine("Du skal skrive et tal");
-                Console.ReadKey();
-            }
+                if (int.TryParse(userInput, out int numberFromPlayer) && userInput.Length == 1 && numberFromPlayer > -1)
+                {
+                    numberIsNotOk = false;
+                    return numberFromPlayer;
+                }
+                else
+                {
+                    Console.WriteLine("Du skal skrive et tal");
+                    Console.ReadKey();
+                }
             } while (numberIsNotOk);
-            return numberFromPlayer;
+            return 0;
         }
 
 
