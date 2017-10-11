@@ -118,7 +118,7 @@ namespace spil
             if (int.TryParse(userInput, out int numberFromPlayer) && userInput.Length == 1 && numberFromPlayer > -1)
             {
                 numberIsNotOk = false;
-                return numberFromPlayer;
+                
             }
             else
             {
@@ -126,6 +126,7 @@ namespace spil
                 Console.ReadKey();
             }
             } while (numberIsNotOk);
+            return numberFromPlayer;
         }
 
 
