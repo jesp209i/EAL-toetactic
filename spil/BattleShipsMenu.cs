@@ -115,6 +115,7 @@ namespace spil
                 BattleShips.EndTurn();
                 Console.Clear();
             }
+            this.PlayerShootsAtShips();
         }
 
         private void PlayerShootsAtShips()
