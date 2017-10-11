@@ -157,7 +157,7 @@ namespace spil
 
         public char ValidatePlacement(int xKordiant, int yKoordinat)
         {
-            return player[battleShipCurrentPlayer].GameBoardMyShips[xKordiant, yKoordinat];
+            return player[battleShipOppositePlayer].GameBoardMyShips[xKordiant, yKoordinat];
 
         }
 
