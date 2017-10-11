@@ -163,14 +163,23 @@ namespace spil
 
         public int GetNumberFromPlayer()
         {
-            char intToPrint;
+            bool numberIsNotOk = true;
             do
             {
-                Console.WriteLine("Du skal skrive et tal.");
-                intToPrint = Console.ReadKey().KeyChar;
-            } while (!char.IsNumber(intToPrint));
-            return Convert.ToInt32(intToPrint);
+            string userInput = Console.ReadLine();
+            if (int.TryParse(userInput, out int numberFromPlayer) && userInput.Length == 1 && numberFromPlayer > -1)
+            {
+                numberIsNotOk = false;
+                return numberFromPlayer;
+            }
+            else
+            {
+                Console.WriteLine("Du skal skrive et tal");
+                Console.ReadKey();
+            }
+            } while (numberIsNotOk);
         }
+
 
         public int FireShotsAtOppositePlayersBoardAndMarkMyShots(int xKoordinat, int yKoordinat)
         {
@@ -252,6 +261,37 @@ namespace spil
                 battleShipOppositePlayer = 1;
 
             }
+        }
+
+        public void SmokeScreen()
+        {
+            string oppositePlayerName;
+            if (this.player[battleShipOppositePlayer].name == "")
+            {
+                oppositePlayerName = "spiller 2";
+            }
+            else
+            {
+                oppositePlayerName = this.player[battleShipOppositePlayer].name;
+            }
+            Console.Clear();
+            Console.WriteLine("     _______  _______  _______  _______  ___      _______  _______  __   __  ___   _______  _______ ");
+            Console.WriteLine("    |  _    ||   _   ||       ||       ||   |    |       ||       ||  | |  ||   | |       ||       |");
+            Console.WriteLine("    | |_|   ||  |_|  ||_     _||_     _||   |    |    ___||  _____||  |_|  ||   | |    _  ||  _____|");
+            Console.WriteLine("    |       ||       |  |   |    |   |  |   |    |   |___ | |_____ |       ||   | |   |_| || |_____ ");
+            Console.WriteLine("    |  _   | |       |  |   |    |   |  |   |___ |    ___||_____  ||       ||   | |    ___||_____  |");
+            Console.WriteLine("    | |_|   ||   _   |  |   |    |   |  |       ||   |___  _____| ||   _   ||   | |   |     _____| |");
+            Console.WriteLine("    |_______||__| |__|  |___|    |___|  |_______||_______||_______||__| |__||___| |___|    |_______|");
+            Console.WriteLine();
+            Console.WriteLine(" _______  ___   _  ___   _______  _______    _______  _______  ___   ___      ___      _______  ______   ");
+            Console.WriteLine("|       ||   | | ||   | |       ||       |  |       ||       ||   | |   |    |   |    |       ||    _ |  ");
+            Console.WriteLine("|  _____||   |_| ||   | |    ___||_     _|  |  _____||    _  ||   | |   |    |   |    |    ___||   | ||  ");
+            Console.WriteLine("| |_____ |      _||   | |   |___   |   |    | |_____ |   |_| ||   | |   |    |   |    |   |___ |   |_||_ ");
+            Console.WriteLine("|_____  ||     |_ |   | |    ___|  |   |    |_____  ||    ___||   | |   |___ |   |___ |    ___||    __  |");
+            Console.WriteLine(" _____| ||    _  ||   | |   |      |   |     _____| ||   |    |   | |       ||       ||   |___ |   |  | |");
+            Console.WriteLine("|_______||___| |_||___| |___|      |___|    |_______||___|    |___| |_______||_______||_______||___|  |_|");
+            Console.WriteLine("Skift spiller, tryk på en tast når " + oppositePlayerName + " er klar");
+            Console.ReadKey();
         }
     }
 }
