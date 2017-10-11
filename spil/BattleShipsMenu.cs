@@ -8,7 +8,7 @@ namespace spil
 {
     class BattleShipsMenu
     {
-        BattleShips battleShips { get; set; }
+        BattleShips BattleShips { get; set; }
         public void Show()
         {
 
@@ -29,9 +29,9 @@ namespace spil
         private void ShowMenu()
         {
             Console.Clear();
-            if (battleShips != null)
+            if (BattleShips != null)
             {
-                Console.WriteLine(battleShips.GetBattleShipsGameBoardView());
+                Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
             }
             Console.WriteLine(" _______  _______  _______  _______  ___      _______  _______  __   __  ___   _______  _______ ");
             Console.WriteLine("|  _    ||   _   ||       ||       ||   |    |       ||       ||  | |  ||   | |       ||       |");
@@ -58,10 +58,10 @@ namespace spil
         private void StartBattleShipsNormalGame()
         {
             Console.Clear();
-            battleShips = new BattleShips();
-            for (int i = 0; i < battleShips.player.Length; i++)
+            BattleShips = new BattleShips();
+            for (int i = 0; i < BattleShips.player.Length; i++)
             {
-                battleShips.player[battleShips.battleShipCurrentPlayer].name = battleShips.GetPlayerName();
+                BattleShips.player[BattleShips.battleShipCurrentPlayer].name = BattleShips.GetPlayerName();
                 for (int j = 0;  j < 9;  j++)
                 {
                     bool shouldPickNewCoordinates = true;
@@ -69,17 +69,17 @@ namespace spil
                     {
                         int xKoordinat;
                         int yKoordinat;
-                        Console.WriteLine(battleShips.GetBattleShipsGameBoardView());
+                        Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
                         Console.WriteLine();
-                        Console.WriteLine("Du er ved, at placere " + battleShips.player[battleShips.battleShipCurrentPlayer].shipNames[j] + ", som er " + battleShips.player[battleShips.battleShipCurrentPlayer].shipLengths[j] + " felter langt.");
+                        Console.WriteLine("Du er ved, at placere " + BattleShips.player[BattleShips.battleShipCurrentPlayer].shipNames[j] + ", som er " + BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j] + " felter langt.");
                         Console.WriteLine("Skriv skibets x-koordinat");
-                        xKoordinat = battleShips.GetNumberFromPlayer();
+                        xKoordinat = BattleShips.GetNumberFromPlayer();
                         Console.WriteLine("Skriv skibets y-koordinat");
-                        yKoordinat = battleShips.GetNumberFromPlayer();
-                        bool isEastClear = battleShips.ValidateShipDirection(xKoordinat, yKoordinat, battleShips.player[battleShips.battleShipCurrentPlayer].shipLengths[j], 'e');
-                        bool isWestClear = battleShips.ValidateShipDirection(xKoordinat, yKoordinat, battleShips.player[battleShips.battleShipCurrentPlayer].shipLengths[j], 'w');
-                        bool isNorthClear = battleShips.ValidateShipDirection(xKoordinat, yKoordinat, battleShips.player[battleShips.battleShipCurrentPlayer].shipLengths[j], 'n');
-                        bool isSouthClear = battleShips.ValidateShipDirection(xKoordinat, yKoordinat, battleShips.player[battleShips.battleShipCurrentPlayer].shipLengths[j], 's');
+                        yKoordinat = BattleShips.GetNumberFromPlayer();
+                        bool isEastClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 'e');
+                        bool isWestClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 'w');
+                        bool isNorthClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 'n');
+                        bool isSouthClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 's');
                         if (isSouthClear || isWestClear || isNorthClear || isSouthClear)
                         {
                             if (isEastClear)
@@ -98,8 +98,8 @@ namespace spil
                             {
                                 Console.WriteLine("Tryk 4 for at placere skibet mod syd");
                             }
-                            int shipDirection = battleShips.GetNumberFromPlayer();
-                            battleShips.PlaceShip(xKoordinat, yKoordinat, battleShips.player[battleShips.battleShipCurrentPlayer].shipLengths[j], shipDirection, battleShips.player[battleShips.battleShipCurrentPlayer].shipChar[j]);
+                            int shipDirection = BattleShips.GetNumberFromPlayer();
+                            BattleShips.PlaceShip(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], shipDirection, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipChar[j]);
                             Console.Clear();
                             shouldPickNewCoordinates = false;
                         }
@@ -111,8 +111,8 @@ namespace spil
                         }
                     } while (shouldPickNewCoordinates);  
                 }
-                battleShips.SmokeScreen();
-                battleShips.EndTurn();
+                BattleShips.SmokeScreen();
+                BattleShips.EndTurn();
                 Console.Clear();
             }
         }
@@ -181,7 +181,7 @@ namespace spil
         private void WeHaveAWinner()
         {
             Console.Clear();
-            Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
+            Console.WriteLine(this.BattleShips.GetBattleShipsGameBoardView());
             Console.WriteLine("Tillykke Kaptajn " + BattleShips.player[BattleShips.battleShipCurrentPlayer].name + "!\nDu har vundet spillet!\nTryk en tast for at komme tilbage til menuen");
             Console.ReadKey();
             BattleShips = null;
