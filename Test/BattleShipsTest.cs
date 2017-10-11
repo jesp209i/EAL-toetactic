@@ -30,7 +30,7 @@ namespace Test
         public void ShipIsNotGone()
         {
             BattleShips battleShipsTest = new BattleShips();
-            
+
             Assert.AreEqual(false, battleShipsTest.IsShipGone(3));
         }
 
@@ -103,7 +103,7 @@ namespace Test
         public void CanPlacePartOfBattleship()
         {
             BattleShips battleShipsTest = new BattleShips();
-            battleShipsTest.PlacePartOfBattleship(3, 2,'#');
+            battleShipsTest.PlacePartOfBattleship(3, 2, '#');
             char[,] expected = new char[10, 10]
         {
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
