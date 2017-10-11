@@ -307,3 +307,4 @@ namespace spil
 // Bonus -----
 // Refactor ValidateShipDirection() - method works, but can be much nicer!
 // Refactor PlaceShip() - method works, but can be much nicer!
+//lmao
