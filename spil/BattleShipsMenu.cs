@@ -98,7 +98,16 @@ namespace spil
                             {
                                 Console.WriteLine("Tryk 4 for at placere skibet mod syd");
                             }
-                            int shipDirection = BattleShips.GetNumberFromPlayer();
+                            int shipDirection;
+                            bool shouldTypeNewCoord = true;
+                            do
+                            {
+                                shipDirection = BattleShips.GetNumberFromPlayer();
+                                if (shipDirection > 0 && shipDirection < 5)
+                                {
+                                    shouldTypeNewCoord = false;
+                                }
+                            } while (shouldTypeNewCoord);
                             BattleShips.PlaceShip(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], shipDirection, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipChar[j]);
                             Console.Clear();
                             shouldPickNewCoordinates = false;
