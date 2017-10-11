@@ -59,7 +59,7 @@ namespace spil
             string resultat = "";
             resultat += "Y   Dine skibe                                      Skyd efter din modstander\n";
             resultat += "   _________________________________________       _________________________________________\n";
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 10; i++)
             {
                 int inverseI = 9 - i;
                 resultat += " " + inverseI + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[0, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[1, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[2, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[3, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[4, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[5, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[6, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[7, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[8, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShips[9, inverseI] + " |     " + inverseI + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[0, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[1, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[2, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[3, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[4, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[5, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[6, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[7, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[8, inverseI] + " | " + player[battleShipCurrentPlayer].GameBoardMyShots[9, inverseI] + " | \n";
@@ -111,22 +111,12 @@ namespace spil
 
         public int GetNumberFromPlayer()
         {
-            bool numberIsNotOk = true;
+            string userInput;
             do
             {
-            string userInput = Console.ReadLine();
-                if (int.TryParse(userInput, out int numberFromPlayer) && userInput.Length == 1 && numberFromPlayer > -1)
-                {
-                    numberIsNotOk = false;
-                    return numberFromPlayer;
-                }
-                else
-                {
-                    Console.WriteLine("Du skal skrive et tal");
-                    Console.ReadKey();
-                }
-            } while (numberIsNotOk);
-            return 0;
+                userInput = Console.ReadLine();
+            } while (!int.TryParse(userInput, out int s) || s > 9 || s < 0);
+            return int.Parse(userInput);
         }
 
 
@@ -215,7 +205,7 @@ namespace spil
         public void SmokeScreen()
         {
             string oppositePlayerName;
-            if (this.player[battleShipOppositePlayer].name == "")
+            if (this.player[battleShipOppositePlayer].name == null)
             {
                 oppositePlayerName = "spiller 2";
             }
@@ -239,6 +229,7 @@ namespace spil
             Console.WriteLine("|_____  ||     |_ |   | |    ___|  |   |    |_____  ||    ___||   | |   |___ |   |___ |    ___||    __  |");
             Console.WriteLine(" _____| ||    _  ||   | |   |      |   |     _____| ||   |    |   | |       ||       ||   |___ |   |  | |");
             Console.WriteLine("|_______||___| |_||___| |___|      |___|    |_______||___|    |___| |_______||_______||_______||___|  |_|");
+            Console.WriteLine();
             Console.WriteLine("Skift spiller, tryk på en tast når " + oppositePlayerName + " er klar");
             Console.ReadKey();
         }
