@@ -79,6 +79,28 @@ namespace spil
 
         public void PlaceShip(int xKoordinat, int yKoordinat, int shipLength, int shiipdirection, char shipletter)
         {
+            int retningHorizontal = 0;
+            int retningVertical = 0;
+            if (shipdirection == 1) //øst
+            {
+                retningHorizontal = 1;
+            }
+            if (shipdirection == 2) //vest
+            {
+                retningHorizontal = -1;
+            }
+            if (shipdirection == 3) //nord
+            {
+                retningVertical = 1;
+            }
+            if (shipdirection == 4) //syd
+            {
+                retningVertical = -1;
+            }
+            for (int i = 0; i < shipLength; i++)
+            {
+                PlacePartOfBattleship(xKoordinat + i * retningHorizontal, yKoordinat + i * retningVertical, shipLetter);
+            }
 
         }
 
