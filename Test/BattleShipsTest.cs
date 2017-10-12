@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using spil;
 
 namespace Test
@@ -80,19 +79,22 @@ namespace Test
             BattleShips battleShipsTest = new BattleShips();
             char[,] expected = new char[10, 10]
             {
+                {'A', ' ', ' ', ' ', ' ', ' ', ' ', 'C', 'C', 'C'},
+                {'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {'A', ' ', ' ', '#', '#', '#', '#', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', '#', '#', '#', '#', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B'},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B'},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'B'},
             };
             //PlaceShip(xKoordinat, yKoordinat, længde, shipdirection)
             battleShipsTest.PlaceShip(3, 3, 4, 3, '#');
+            battleShipsTest.PlaceShip(0, 0, 4, 1, 'A');
+            battleShipsTest.PlaceShip(9, 9, 3, 2, 'B');
+            battleShipsTest.PlaceShip(0, 9, 3, 4, 'C');
             CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipCurrentPlayer].GameBoardMyShips);
 
         }
@@ -134,13 +136,89 @@ namespace Test
             battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths = new int[9] {0,0,0,0,0,0,0,0,0};
             Assert.AreEqual(true, battleShipsTest.HasAnyoneWonTheGame());
         }
+        [TestMethod]
         public void BSWeDontHaveAWinner()
         {
             BattleShips battleShipsTest = new BattleShips();
             battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths = new int[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
             Assert.AreEqual(false, battleShipsTest.HasAnyoneWonTheGame());
-
-
+        }
+        [TestMethod]
+        public void BSHasHitShip()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].GameBoardMyShips = new char[10,10]
+                        {
+                        {'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                        };
+            Assert.AreEqual(2, battleShipsTest.FireShotsAtOppositePlayersBoardAndMarkMyShots(0,0));
+        }
+        [TestMethod]
+        public void BSHasNotHitShip()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].GameBoardMyShips = new char[10, 10]
+                        {
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                        };
+            Assert.AreEqual(3, battleShipsTest.FireShotsAtOppositePlayersBoardAndMarkMyShots(0, 0));
+        }
+        [TestMethod]
+        public void BSAlreadyShotAtThatPlace()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].GameBoardMyShips = new char[10, 10]
+                        {
+                        {'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                        };
+            Assert.AreEqual(4, battleShipsTest.FireShotsAtOppositePlayersBoardAndMarkMyShots(0, 0));
+        }
+        [TestMethod]
+        public void BSSunkShip()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths = new int[9] {1,2,2,3,3,4,4,5,9 };
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].GameBoardMyShips = new char[10, 10]
+                        {
+                        {'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                        };
+            Assert.AreEqual(1, battleShipsTest.FireShotsAtOppositePlayersBoardAndMarkMyShots(0, 0));
         }
     }
 }
