@@ -105,7 +105,10 @@ namespace spil
                                 shipDirection = BattleShips.GetNumberFromPlayer();
                                 if (shipDirection > 0 && shipDirection < 5)
                                 {
-                                    shouldTypeNewCoord = false;
+                                    if ((shipDirection == 1 && isEastClear) || (shipDirection == 2 && isWestClear) || (shipDirection == 3 && isNorthClear) || (shipDirection == 4 && isSouthClear))
+                                    {
+                                        shouldTypeNewCoord = false;
+                                    }
                                 }
                             } while (shouldTypeNewCoord);
                             BattleShips.PlaceShip(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], shipDirection, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipChar[j]);
