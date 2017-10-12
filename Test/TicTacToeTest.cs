@@ -8,7 +8,7 @@ namespace Test
     public class TicTacToeTest
     {
         [TestMethod]
-        public void NeitherPlayerHasThreeInARow()
+        public void T3NeitherPlayerHasThreeInARow()
         {
             TicTacToe ticTacToe = new TicTacToe();
             const char expectet = ' ';
@@ -17,7 +17,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void ThreeInARow()
+        public void T3ThreeInARow()
         {
             TicTacToe ticTacToe = new TicTacToe();
             const char expectet = 'x';
@@ -32,7 +32,7 @@ namespace Test
 
         }
         [TestMethod]
-        public void ThreeInAColumn()
+        public void T3ThreeInAColumn()
         {
             TicTacToe ticTacToe = new TicTacToe();
             const char expectet = 'O';
@@ -46,7 +46,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void ThreeDiagonaly()
+        public void T3ThreeDiagonaly()
         {
             TicTacToe ticTacToe = new TicTacToe();
             const char expectet = 'X';
@@ -60,7 +60,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void PlayerDraw()
+        public void T3PlayerDraw()
         {
             TicTacToe ticTacToe = new TicTacToe();
             const char expectet = ' ';
