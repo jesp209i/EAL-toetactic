@@ -27,26 +27,24 @@ namespace Test
             Assert.AreEqual('x', battleShipsTest.ValidatePlacement(3, 2));
         }
         [TestMethod]
+        public void BSOpponentGameBoardSquareIsEmpty()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            Assert.AreEqual(' ', battleShipsTest.ValidatePlacement(3, 2));
+        }
+        [TestMethod]
         public void BSShipIsNotGone()
         {
             BattleShips battleShipsTest = new BattleShips();
 
             Assert.AreEqual(false, battleShipsTest.IsShipGone(3));
         }
-
         [TestMethod]
         public void BSShipIsGone()
         {
             BattleShips battleShipsTest = new BattleShips();
             battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths[3] = 0;
             Assert.AreEqual(true, battleShipsTest.IsShipGone(3));
-        }
-
-        [TestMethod]
-        public void BSOpponentGameBoardSquareIsEmpty()
-        {
-            BattleShips battleShipsTest = new BattleShips();
-            Assert.AreEqual(' ', battleShipsTest.ValidatePlacement(3, 2));
         }
         [TestMethod]
         public void BSCanVerifyThatShipCanBePlacedOnGameBoard()
@@ -119,7 +117,7 @@ namespace Test
             CollectionAssert.AreEqual(expected, battleShipsTest.player[battleShipsTest.battleShipCurrentPlayer].GameBoardMyShips);
         }
         [TestMethod]
-        public void BSChangeFromPlayerOneToPlayerTwo()
+        public void BSChangeFromPlayerOneToPlayerTwoAndBackAgain()
         {
             BattleShips battleShipsTest = new BattleShips();
             battleShipsTest.EndTurn();
@@ -135,6 +133,12 @@ namespace Test
             BattleShips battleShipsTest = new BattleShips();
             battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths = new int[9] {0,0,0,0,0,0,0,0,0};
             Assert.AreEqual(true, battleShipsTest.HasAnyoneWonTheGame());
+        }
+        public void BSWeDontHaveAWinner()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.player[battleShipsTest.battleShipOppositePlayer].shipLengths = new int[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            Assert.AreEqual(false, battleShipsTest.HasAnyoneWonTheGame());
 
 
         }
