@@ -167,7 +167,8 @@ namespace spil
                         case 4:
                             Console.Clear();
                             Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
-                            Console.WriteLine("Du har allerede skudt der... Prøv igen, Snotskovl! :)");
+                            Console.WriteLine("Du har allerede skudt der... Prøv igen, Snotskovl! :) Tryk på en tast for at skyde igen");
+                            Console.ReadKey();
                             break;
                     }
                 } while (notReadyToEndTurn);
