@@ -62,7 +62,7 @@ namespace spil
             for (int i = 0; i < BattleShips.player.Length; i++)
             {
                 BattleShips.player[BattleShips.battleShipCurrentPlayer].name = BattleShips.GetPlayerName();
-                for (int j = 0;  j < 9;  j++)
+                for (int j = 0;  j < BattleShips.player[BattleShips.battleShipCurrentPlayer].shipNames.Length;  j++)
                 {
                     bool shouldPickNewCoordinates = true;
                     do
