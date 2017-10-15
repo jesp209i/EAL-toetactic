@@ -30,9 +30,6 @@ namespace spil
         {
             Console.Clear();
             if (BattleShips != null)
-            {
-                Console.WriteLine(BattleShips.GetBattleShipsGameBoardView());
-            }
             Console.WriteLine(" _______  _______  _______  _______  ___      _______  _______  __   __  ___   _______  _______ ");
             Console.WriteLine("|  _    ||   _   ||       ||       ||   |    |       ||       ||  | |  ||   | |       ||       |");
             Console.WriteLine("| |_|   ||  |_|  ||_     _||_     _||   |    |    ___||  _____||  |_|  ||   | |    _  ||  _____|");
@@ -80,7 +77,7 @@ namespace spil
                         bool isWestClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 'w');
                         bool isNorthClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 'n');
                         bool isSouthClear = BattleShips.ValidateShipDirection(xKoordinat, yKoordinat, BattleShips.player[BattleShips.battleShipCurrentPlayer].shipLengths[j], 's');
-                        if (isSouthClear || isWestClear || isNorthClear || isSouthClear)
+                        if (isSouthClear || isWestClear || isNorthClear || isEastClear)
                         {
                             if (isEastClear)
                             {

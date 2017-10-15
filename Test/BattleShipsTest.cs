@@ -7,6 +7,37 @@ namespace Test
     public class BattleShipsTest
     {
         [TestMethod]
+        public void BSCanPlaceAllShips()
+        {
+            BattleShips battleShipsTest = new BattleShips();
+            battleShipsTest.PlaceShip(0, 0, 2, 1, 'A');
+            battleShipsTest.PlaceShip(0, 1, 2, 1, 'B');
+            battleShipsTest.PlaceShip(0, 2, 2, 1, 'C');
+            battleShipsTest.PlaceShip(0, 3, 3, 1, 'D');
+            battleShipsTest.PlaceShip(0, 4, 3, 1, 'E');
+            battleShipsTest.PlaceShip(0, 5, 3, 1, 'F');
+            battleShipsTest.PlaceShip(0, 6, 4, 1, 'G');
+            //battleShipsTest.PlaceShip(0, 7, 4, 1, 'H');
+            //battleShipsTest.PlaceShip(0, 8, 5, 1, 'I');
+            /*char[,] expected = new char[10,10]
+                        {
+                {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', ' '},
+                {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', ' '},
+                {' ', ' ', ' ', 'D', 'E', 'F', 'G', 'H', 'I', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', 'G', 'H', 'I', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'I', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+            };*/
+            Assert.AreEqual(true, battleShipsTest.ValidateShipDirection(0, 7, 4, 'e'));
+            Assert.AreEqual(false, battleShipsTest.ValidateShipDirection(0, 7, 4, 'n'));
+            Assert.AreEqual(false, battleShipsTest.ValidateShipDirection(0, 7, 4, 's'));
+            Assert.AreEqual(false, battleShipsTest.ValidateShipDirection(0, 7, 4, 'w'));
+        }
+        [TestMethod]
         public void BSOpponentGameBoardSquareIsNotEmpty()
         {
             BattleShips battleShipsTest = new BattleShips();
@@ -220,5 +251,6 @@ namespace Test
                         };
             Assert.AreEqual(1, battleShipsTest.FireShotsAtOppositePlayersBoardAndMarkMyShots(0, 0));
         }
+
     }
 }
